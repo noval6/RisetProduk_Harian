@@ -1,938 +1,435 @@
-<!doctype html><html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Riset Produk Harian · lebihcakep</title>
+<!doctype html>
+<html lang="id"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Riset Produk Harian · lebihcakep</title>
 <style>
+:root{--bg:#0b0b0f;--card:#15151c;--acc:#ff7a1a;--txt:#e9e9ee;--mut:#8a8a99;--line:#262630;--pos:#2ecc71;--neg:#ff5a5a}
 *{box-sizing:border-box;margin:0;padding:0}
-:root{--bg:#0b0b0f;--card:#15151c;--accent:#ff7a1a;--muted:#8a8a99;--line:#24242e;--txt:#ececf1}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;line-height:1.5;padding:0 0 60px}
+body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.5;padding:0 0 60px}
 .wrap{max-width:1180px;margin:0 auto;padding:0 16px}
-header{padding:28px 0 18px;border-bottom:1px solid var(--line);margin-bottom:22px}
-.brandrow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
-.logo{font-weight:800;font-size:22px;letter-spacing:.3px}
-.logo .o{color:var(--accent)}
-.pill{background:rgba(255,122,26,.13);color:var(--accent);font-size:12px;font-weight:600;padding:4px 10px;border-radius:999px;border:1px solid rgba(255,122,26,.3)}
-.sub{color:var(--muted);font-size:14px;margin-top:6px}
-.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 16px;min-width:92px}
-.stat b{display:block;font-size:22px;color:var(--accent)}
-.stat span{font-size:12px;color:var(--muted)}
+header{padding:34px 0 18px;border-bottom:1px solid var(--line);margin-bottom:22px}
+.kick{color:var(--acc);font-weight:700;letter-spacing:2px;font-size:12px;text-transform:uppercase}
+h1{font-size:29px;margin:8px 0 4px;font-weight:800}
+#dateline{color:var(--mut);font-size:15px}
+.stats{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 18px;min-width:120px}
+.stat b{display:block;font-size:26px;color:var(--acc);line-height:1}
+.stat span{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.5px}
 .tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
-.tab{background:var(--card);border:1px solid var(--line);color:var(--muted);padding:9px 14px;border-radius:10px;cursor:pointer;font-size:14px;font-weight:600;transition:.15s}
+.tab{background:var(--card);border:1px solid var(--line);color:var(--mut);padding:10px 15px;border-radius:999px;cursor:pointer;font-size:13.5px;font-weight:600;transition:.15s}
 .tab:hover{color:var(--txt)}
-.tab.active{background:var(--accent);color:#120a02;border-color:var(--accent)}
-.tcount{opacity:.7;font-weight:700}
+.tab.active{background:var(--acc);color:#111;border-color:var(--acc)}
+.tcount{opacity:.7;font-size:11px}
 .panel{display:none}.panel.active{display:block}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;cursor:pointer;transition:.15s;display:flex;flex-direction:column}
-.card:hover{border-color:var(--accent);transform:translateY(-2px)}
-.card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
-.rank{font-weight:800;color:var(--accent);font-size:15px}
-.badge-inv{background:rgba(255,122,26,.15);color:var(--accent);font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px;border:1px solid rgba(255,122,26,.35)}
-.ptitle{font-size:14px;font-weight:600;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:42px}
-.metrics{display:grid;grid-template-columns:1fr 1fr;gap:7px 12px}
-.m{display:flex;flex-direction:column}
-.m span{font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.3px}
-.m b{font-size:13.5px}
-.accent{color:var(--accent)}
-.pos{color:#3ddc84}.neg{color:#ff5c6c}.flat{color:var(--muted)}
-.flag{margin-top:11px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);padding-top:9px;min-height:16px}
-.modal{display:none;position:fixed;inset:0;z-index:50}
-.modal.open{display:block}
-.modal-bg{position:absolute;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(2px)}
-.modal-box{position:relative;max-width:560px;margin:5vh auto;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px;max-height:90vh;overflow:auto}
-.mclose{position:absolute;top:14px;right:16px;background:none;border:none;color:var(--muted);font-size:26px;cursor:pointer;line-height:1}
-.mcat{font-size:12px;color:var(--accent);font-weight:600;margin-bottom:6px}
-.modal-box h2{font-size:18px;margin-bottom:16px;padding-right:24px}
-.usp{background:rgba(255,122,26,.08);border:1px solid rgba(255,122,26,.2);border-radius:12px;padding:13px 15px;margin-bottom:16px}
-.usp-l{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--accent);font-weight:700;margin-bottom:5px}
-.usp p{font-size:14px}
-.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:18px}
-.mgrid div{display:flex;flex-direction:column}
-.mgrid span{font-size:10.5px;color:var(--muted);text-transform:uppercase}
-.mgrid b{font-size:14px;margin-top:2px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;cursor:pointer;transition:.15s;display:flex;flex-direction:column}
+.card:hover{border-color:var(--acc);transform:translateY(-3px)}
+.crank{font-size:12px;color:var(--mut);font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.binv{background:rgba(255,122,26,.16);color:var(--acc);padding:2px 8px;border-radius:999px;font-size:11px;font-weight:700}
+.ctitle{font-size:14px;font-weight:600;line-height:1.35;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:38px}
+.cbrand{color:var(--acc);font-size:12px;font-weight:600;margin:4px 0 12px}
+.cmetrics{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;margin-top:auto}
+.m span{display:block;font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:.3px}
+.m b{font-size:14px}
+.acc{color:var(--acc)}.pos{color:var(--pos)}.neg{color:var(--neg)}
+.cflag{margin-top:11px;font-size:11.5px;color:#ffb27a;background:rgba(255,122,26,.08);padding:6px 9px;border-radius:8px}
+.cmore{margin-top:12px;font-size:12px;color:var(--mut);font-weight:600}
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:18px;z-index:50}
+.overlay.open{display:flex}
+.modal{background:var(--card);border:1px solid var(--line);border-radius:18px;max-width:560px;width:100%;max-height:88vh;overflow:auto;padding:24px}
+.mhead{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.mhead h3{font-size:18px;line-height:1.35}
+.mbrand{color:var(--mut);font-size:13px;margin:10px 0 16px}
+.mbrand b{color:var(--acc)}
+.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.mm{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.mm span{display:block;font-size:11px;color:var(--mut);text-transform:uppercase;letter-spacing:.3px}
+.mm b{font-size:16px}
+.musp{background:rgba(255,122,26,.07);border:1px solid rgba(255,122,26,.25);border-radius:12px;padding:14px;margin-bottom:14px}
+.musp-t{color:var(--acc);font-weight:700;font-size:13px;margin-bottom:6px}
+.musp p{font-size:14px;color:var(--txt)}
+.mflag{font-size:13px;color:#ffb27a;background:rgba(255,122,26,.08);padding:9px 12px;border-radius:9px;margin-bottom:14px}
 .mlinks{display:flex;gap:10px;flex-wrap:wrap}
-.btn{flex:1;text-align:center;padding:12px;border-radius:10px;text-decoration:none;font-weight:700;font-size:14px;min-width:150px}
-.btn-kalo{background:#242433;color:var(--txt);border:1px solid var(--line)}
-.btn-tts{background:var(--accent);color:#120a02}
-.btn:hover{opacity:.9}
-footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:34px;padding-top:18px;border-top:1px solid var(--line)}
-@media(max-width:560px){.mgrid{grid-template-columns:repeat(2,1fr)}.modal-box{margin:2vh 10px}}
+.btn{flex:1;text-align:center;padding:12px;border-radius:11px;text-decoration:none;font-weight:700;font-size:13.5px;min-width:140px}
+.btn1{background:#222230;color:var(--txt);border:1px solid var(--line)}
+.btn2{background:var(--acc);color:#111}
+.mclose{background:none;border:1px solid var(--line);color:var(--mut);border-radius:8px;width:34px;height:34px;cursor:pointer;font-size:18px;flex-shrink:0}
+footer{text-align:center;color:var(--mut);font-size:12.5px;margin-top:40px;padding-top:20px;border-top:1px solid var(--line)}
+@media(max-width:520px){.mgrid,.cmetrics{grid-template-columns:1fr 1fr}h1{font-size:23px}}
 </style></head>
 <body><div class="wrap">
 <header>
-  <div class="brandrow"><span class="logo">lebih<span class="o">cakep</span></span><span class="pill">Riset Produk Harian</span></div>
-  <div class="sub" id="dateline">Selasa, 6 Oktober 2026 · @lebihcakep.bymarco · fokus fashion & aksesoris pria</div>
+  <div class="kick">Automated Research Report</div>
+  <h1>Riset Produk Harian · lebihcakep</h1>
+  <div id="dateline">Rabu, 7 Oktober 2026 · TikTok Shop Indonesia · data 30 hari terakhir</div>
   <div class="stats">
-    <div class="stat"><b id="s-total">25</b><span>Produk</span></div>
-    <div class="stat"><b id="s-cat">5</b><span>Kategori</span></div>
-    <div class="stat"><b id="s-inv">2</b><span>Match Inventory</span></div>
+    <div class="stat"><b>25</b><span>Produk</span></div>
+    <div class="stat"><b>5</b><span>Kategori</span></div>
+    <div class="stat"><b>2</b><span>Match Inventory</span></div>
+    <div class="stat"><b>&ge;8%</b><span>Komisi Min</span></div>
   </div>
 </header>
-<div class="tabs"><button class="tab active" data-tab="0">Sepatu <span class="tcount">5</span></button><button class="tab" data-tab="1">Tas <span class="tcount">5</span></button><button class="tab" data-tab="2">Jaket &amp; Mantel <span class="tcount">5</span></button><button class="tab" data-tab="3">Pakaian Dalam <span class="tcount">5</span></button><button class="tab" data-tab="4">Kacamata <span class="tcount">5</span></button></div>
-<div class="panel active" data-panel="0"><div class="grid"><div class="card" data-modal="0_0">
-        <div class="card-top"><span class="rank">#1</span></div>
-        <div class="ptitle">[YESPLUS] 8889-1 Sandal Baim UNISEX Sendal Wanita Import Premium Bahan EVA Rubber Premium Model Kecher UK 36-41 Warna Black Hitam Mocca Putih Shoes</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp285,26RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">11%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-95.9%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>45%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp656,11JT</b></div>
-          <div class="m"><span>Kreator</span><b>167</b></div>
-        </div>
-        <div class="flag">⚠️ Momentum anjlok &amp; label 'wanita' — off-niche buat fashion pria</div>
-      </div><div class="card" data-modal="0_1">
-        <div class="card-top"><span class="rank">#2</span></div>
-        <div class="ptitle">RAINGEL - Sepatu Lokal - CONTEMPORA - Black Pink</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp399,34RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">9%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-28%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>31%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp583,83JT</b></div>
-          <div class="m"><span>Kreator</span><b>176</b></div>
-        </div>
-        <div class="flag">Brand lokal premium, laku stabil</div>
-      </div><div class="card" data-modal="0_2">
-        <div class="card-top"><span class="rank">#3</span></div>
-        <div class="ptitle">RAINGEL - Sepatu Lokal - FORT - All Black</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp287,79RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">9%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-43.8%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>36%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp496,44JT</b></div>
-          <div class="m"><span>Kreator</span><b>169</b></div>
-        </div>
-        <div class="flag">Colourway all-black serbaguna</div>
-      </div><div class="card" data-modal="0_3">
-        <div class="card-top"><span class="rank">#4</span></div>
-        <div class="ptitle">VULUNG-BLAZING Sepatu Sneakers Casual Unisex Remaja &amp; Dewasa,Sepatu Running Best Shoes</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp267,07RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">8%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-79.6%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>25%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp488,20JT</b></div>
-          <div class="m"><span>Kreator</span><b>102</b></div>
-        </div>
-        <div class="flag">Kreator 102 (lebih longgar), multifungsi</div>
-      </div><div class="card" data-modal="0_4">
-        <div class="card-top"><span class="rank">#5</span></div>
-        <div class="ptitle">EMOE - BUBBLE REFLEKTIVE Sneakers Pria Wanita Sepatu Kasual Hitam Reflektif Elegan Shoes Karet Casual Unisex Low Cut Kanvas Double Foam Mesh Suede - Black Reflektif</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp336,70RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">8%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-77.9%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>40%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp411,78JT</b></div>
-          <div class="m"><span>Kreator</span><b>128</b></div>
-        </div>
-        <div class="flag">Detail reflektif = hook visual malam</div>
-      </div></div></div><div class="panel" data-panel="1"><div class="grid"><div class="card" data-modal="1_0">
-        <div class="card-top"><span class="rank">#1</span></div>
-        <div class="ptitle">Hefand - Handbag Pria Aero Elite Tas Selempang Pria Clucth Bag Tas Tangan Pria Hand Bag Tas Slempang Cowok Kulit Waterproof</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp229,26RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">10%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-51.6%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>26%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp402,12JT</b></div>
-          <div class="m"><span>Kreator</span><b>137</b></div>
-        </div>
-        <div class="flag">Rev #1 tas, clutch premium</div>
-      </div><div class="card" data-modal="1_1">
-        <div class="card-top"><span class="rank">#2</span></div>
-        <div class="ptitle">BAYT | Niza ultiMAX handbag pria clutch dompet hp waterproof Zipper Hitam</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp133,66RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">10%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-36.2%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>22%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp402,06JT</b></div>
-          <div class="m"><span>Kreator</span><b>194</b></div>
-        </div>
-        <div class="flag">Murah + sale 3.008, waterproof</div>
-      </div><div class="card" data-modal="1_2">
-        <div class="card-top"><span class="rank">#3</span></div>
-        <div class="ptitle">GUVDIV  Tas Selempang Santai dan Sporty Tas Laptop Unisex Banyak Kantong Tahan Air dan Tahan Lama Sekolah Pria Kanvas Kulit Canvas</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp222,48RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">10%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-71.5%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>26%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp352,64JT</b></div>
-          <div class="m"><span>Kreator</span><b>178</b></div>
-        </div>
-        <div class="flag">Sling bag muat laptop, unisex</div>
-      </div><div class="card" data-modal="1_3">
-        <div class="card-top"><span class="rank">#4</span></div>
-        <div class="ptitle">Harmits  - Tablet 11 Inch TOKYO Clutch Bag Cowok Anti Air Anti Api  Pria Wanita UNISEX</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp190,99RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">10%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-56.1%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>59%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp346,26JT</b></div>
-          <div class="m"><span>Kreator</span><b>115</b></div>
-        </div>
-        <div class="flag">Konversi 59% tertinggi di tas</div>
-      </div><div class="card" data-modal="1_4">
-        <div class="card-top"><span class="rank">#5</span><span class="badge-inv" title="Ada di inventory: 3 Second">🔥 Inventory</span></div>
-        <div class="ptitle">3Second Tas Pinggang Pria Waist Bag Polyester Caelum OL-C061124</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp328,72RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">9%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-83.8%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>37%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp334,31JT</b></div>
-          <div class="m"><span>Kreator</span><b>159</b></div>
-        </div>
-        <div class="flag">🔥 Inventory ready — waist bag streetwear</div>
-      </div></div></div><div class="panel" data-panel="2"><div class="grid"><div class="card" data-modal="2_0">
-        <div class="card-top"><span class="rank">#1</span></div>
-        <div class="ptitle">Detroit Work Jacket boxy crop, Jacket Pria bahan Kanvas jaket</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp354,92RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">15%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-6.8%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>21%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp807,08JT</b></div>
-          <div class="m"><span>Kreator</span><b>160</b></div>
-        </div>
-        <div class="flag">⭐ Komisi 15% tertinggi + paling stabil, rev #1</div>
-      </div><div class="card" data-modal="2_1">
-        <div class="card-top"><span class="rank">#2</span><span class="badge-inv" title="Ada di inventory: Screamous">🔥 Inventory</span></div>
-        <div class="ptitle">[BEST SELLER] Screamous WindBreaker Jacket HAMESH BLACK</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp375,90RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">9%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-47.5%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>7%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp605,95JT</b></div>
-          <div class="m"><span>Kreator</span><b>142</b></div>
-        </div>
-        <div class="flag">🔥 Inventory ready; konversi kreator rendah 7%</div>
-      </div><div class="card" data-modal="2_2">
-        <div class="card-top"><span class="rank">#3</span></div>
-        <div class="ptitle">Greenlight Jaket Parka Pria Regular Fit Baby Canvas Elion OL-CG110426</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp318,40RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">9%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-77.4%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>67%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp434,62JT</b></div>
-          <div class="m"><span>Kreator</span><b>52</b></div>
-        </div>
-        <div class="flag">🚀 Kreator 52 + konversi 67% — early mover</div>
-      </div><div class="card" data-modal="2_3">
-        <div class="card-top"><span class="rank">#4</span></div>
-        <div class="ptitle">Dobujack Jacket Reversible Holly Black</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp284,18RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">10%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-39.3%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>11%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp403,54JT</b></div>
-          <div class="m"><span>Kreator</span><b>176</b></div>
-        </div>
-        <div class="flag">Reversible 2 sisi = hook konten</div>
-      </div><div class="card" data-modal="2_4">
-        <div class="card-top"><span class="rank">#5</span></div>
-        <div class="ptitle">Noree. Jaket Boxy Canvas Work Jaket Vintage Breadley - UNISEX</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp263,61RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">9%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-43.3%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>24%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp346,39JT</b></div>
-          <div class="m"><span>Kreator</span><b>152</b></div>
-        </div>
-        <div class="flag">Produk baru launch, termurah di jaket</div>
-      </div></div></div><div class="panel" data-panel="3"><div class="grid"><div class="card" data-modal="3_0">
-        <div class="card-top"><span class="rank">#1</span></div>
-        <div class="ptitle">【beli 4 gratis 2】S9002 French men's sports underwear marathon professional running underwear anti-wear quick-drying underwear randomly matched Fit Soft Boxer Seamless Basicbeli Mini</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp152,16RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">10%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-0.4%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>34%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp1,10M</b></div>
-          <div class="m"><span>Kreator</span><b>199</b></div>
-        </div>
-        <div class="flag">⭐ Terlaris se-report (Rp1,10M), growth stabil</div>
-      </div><div class="card" data-modal="3_1">
-        <div class="card-top"><span class="rank">#2</span></div>
-        <div class="ptitle">PROMO !!! (PAKET ISI 6pcs) Celana Dalam Boxer Pria Premium Anti Bakteri | Nyaman &amp; Elastis</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp141,18RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">10%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-32.4%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>71%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp690,49JT</b></div>
-          <div class="m"><span>Kreator</span><b>141</b></div>
-        </div>
-        <div class="flag">Konversi 71% tertinggi se-report</div>
-      </div><div class="card" data-modal="3_2">
-        <div class="card-top"><span class="rank">#3</span></div>
-        <div class="ptitle">3/6pcs UOMO Pakaian dalam olahraga kelas atas Boxer Fit Dewasa Pria bahan ditingkatkan lembut Paket 6 Pcs Celana Dalam Olahraga Anak Laki-laki</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp103,71RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">10%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-48.7%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>53%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp439,64JT</b></div>
-          <div class="m"><span>Kreator</span><b>124</b></div>
-        </div>
-        <div class="flag">Harga super ramah Rp103rb</div>
-      </div><div class="card" data-modal="3_3">
-        <div class="card-top"><span class="rank">#4</span></div>
-        <div class="ptitle">[PROMO] VAUDREÉ - PAKET HEMAT ISI 4 PCS Celana Dalam Boxer Pria Ice Silk Lembut Dingin Antibakteri Nyaman Dewasa Seamless Premium</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp89,02RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">10%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="pos">1.8%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>59%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp375,56JT</b></div>
-          <div class="m"><span>Kreator</span><b>115</b></div>
-        </div>
-        <div class="flag">🚀 Growth POSITIF +1,8%, momentum naik</div>
-      </div><div class="card" data-modal="3_4">
-        <div class="card-top"><span class="rank">#5</span></div>
-        <div class="ptitle">PAKET 4 PCS Celana Dalam Pria Boxer Motif corak Because Poliester Spandek CDP108 Sholadia</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp80,93RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">10%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-60.4%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>60%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp370,35JT</b></div>
-          <div class="m"><span>Kreator</span><b>177</b></div>
-        </div>
-        <div class="flag">Termurah di report (Rp80rb)</div>
-      </div></div></div><div class="panel" data-panel="4"><div class="grid"><div class="card" data-modal="4_0">
-        <div class="card-top"><span class="rank">#1</span></div>
-        <div class="ptitle">Kacamata Sunglasses Frame Kotak PD28812 Polarized Anti UV-400 Protection - Kacamata Fashion Tren - Kacamata Gaya Terbaru Fullset</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp186,56RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">9%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-67.5%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>33%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp568,08JT</b></div>
-          <div class="m"><span>Kreator</span><b>150</b></div>
-        </div>
-        <div class="flag">Rev #1 kacamata, polarized anti-UV</div>
-      </div><div class="card" data-modal="4_1">
-        <div class="card-top"><span class="rank">#2</span></div>
-        <div class="ptitle">Kacamata Hitam Dalwa Fotokromik, Visi Siang dan Malam, untuk Berkemudi di Hujan, Lensa Berubah Warna dan Terpolarisasi, Anti-Silau, Bingkai Fleksibel TR90 untuk Pria, Kacamata Mengemudi &amp; Memancing, Pelindung UV400, untuk Olahraga Luar Ruangan</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp167,02RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">10%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-34.6%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>34%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp461,80JT</b></div>
-          <div class="m"><span>Kreator</span><b>169</b></div>
-        </div>
-        <div class="flag">Lensa transisi siang-malam, hook demo</div>
-      </div><div class="card" data-modal="4_2">
-        <div class="card-top"><span class="rank">#3</span></div>
-        <div class="ptitle">【FLEKSIBEL】Dalwa Kacamata Driving Fotokromik Terpolarisasi Anti UV400 360° Guard - Kacamata Hitam Pria Premium untuk Hiking | Fishing | Olahraga Outdoor, UKURAN UNIVERSAL Cocok Semua Bentuk Wajah Eyewear Sunglasses</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp254,43RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">10%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-53.7%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>34%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp440,41JT</b></div>
-          <div class="m"><span>Kreator</span><b>149</b></div>
-        </div>
-        <div class="flag">Fotokromik+polarized buat nyetir</div>
-      </div><div class="card" data-modal="4_3">
-        <div class="card-top"><span class="rank">#4</span></div>
-        <div class="ptitle">Kacamata Progresif Baca &amp; Jalan dengan Lensa Warna Anti UV untuk Pria Wanita +100 s/d +300 Gratis Box Lap Viber Cairan Pembersih Lensa Eyewear Glasses</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp165,71RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">8%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="neg">-57.8%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>49%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp420,41JT</b></div>
-          <div class="m"><span>Kreator</span><b>84</b></div>
-        </div>
-        <div class="flag">Kreator 84, lensa baca+jalan</div>
-      </div><div class="card" data-modal="4_4">
-        <div class="card-top"><span class="rank">#5</span></div>
-        <div class="ptitle">【GM-Plot 2370 Kacamata (Buy 1 Get 5)】【Eksklusif &amp; Premium Gift Box】 Kacamata hitam wanita/ Sunglasses/ Titanium/UV /Produk Baru/ Kacamata Fashion/ Tanpa Bingkai/ Bingkai Penuh/ Pelindung Ultraviolet/ Versi Korea /Kualitas Tinggi /Kacamata Terpolarisasi</div>
-        <div class="metrics">
-          <div class="m"><span>Harga</span><b>Rp154,78RB</b></div>
-          <div class="m"><span>Komisi</span><b class="accent">9%</b></div>
-          <div class="m"><span>Growth 30hr</span><b class="pos">7%</b></div>
-          <div class="m"><span>Konv. Kreator</span><b>50%</b></div>
-          <div class="m"><span>Revenue 30hr</span><b>Rp417,90JT</b></div>
-          <div class="m"><span>Kreator</span><b>40</b></div>
-        </div>
-        <div class="flag">🚀 Kreator 40 + growth +7% — early mover terkuat</div>
-      </div></div></div>
-<div class="modal" id="m_0_0">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Sepatu · #1 </div>
-          <h2>[YESPLUS] 8889-1 Sandal Baim UNISEX Sendal Wanita Import Premium Bahan EVA Rubber Premium Model Kecher UK 36-41 Warna Black Hitam Mocca Putih Shoes</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Sandal EVA rubber unisex yang sempat viral (revenue tertinggi di kategori), tapi growth -95,9% berarti momentum udah lewat jauh — masuk murni karena revenue akumulatif.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp285,26RB</b></div>
-            <div><span>Avg Price</span><b>Rp285,26RB</b></div>
-            <div><span>Komisi</span><b class="accent">11%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-95.9%</b></div>
-            <div><span>Konv. Kreator</span><b>45%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp656,11JT</b></div>
-            <div><span>Terjual</span><b>2300</b></div>
-            <div><span>Rating</span><b>4.9</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1734159728651044101">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1734159728651044101?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_0_1">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Sepatu · #2 </div>
-          <h2>RAINGEL - Sepatu Lokal - CONTEMPORA - Black Pink</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Sneaker brand lokal RAINGEL, harga premium ~Rp400rb tapi tetap laku (rev 583jt). Angle konten: dukung produk lokal + styling daily.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp399,34RB</b></div>
-            <div><span>Avg Price</span><b>Rp399,34RB</b></div>
-            <div><span>Komisi</span><b class="accent">9%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-28%</b></div>
-            <div><span>Konv. Kreator</span><b>31%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp583,83JT</b></div>
-            <div><span>Terjual</span><b>1462</b></div>
-            <div><span>Rating</span><b>4.9</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1732147706745423771">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1732147706745423771?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_0_2">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Sepatu · #3 </div>
-          <h2>RAINGEL - Sepatu Lokal - FORT - All Black</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>RAINGEL versi all-black Rp287rb — colourway serba hitam gampang masuk ke outfit apa aja, aman buat konten OOTD netral.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp287,79RB</b></div>
-            <div><span>Avg Price</span><b>Rp287,79RB</b></div>
-            <div><span>Komisi</span><b class="accent">9%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-43.8%</b></div>
-            <div><span>Konv. Kreator</span><b>36%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp496,44JT</b></div>
-            <div><span>Terjual</span><b>1725</b></div>
-            <div><span>Rating</span><b>4.8</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1730519088998352795">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1730519088998352795?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_0_3">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Sepatu · #4 </div>
-          <h2>VULUNG-BLAZING Sepatu Sneakers Casual Unisex Remaja &amp; Dewasa,Sepatu Running Best Shoes</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Sneaker running unisex entry-price Rp267rb, kreator baru cuma 102 jadi kompetisi lebih longgar. Angle: sepatu multifungsi casual + olahraga.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp267,07RB</b></div>
-            <div><span>Avg Price</span><b>Rp267,07RB</b></div>
-            <div><span>Komisi</span><b class="accent">8%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-79.6%</b></div>
-            <div><span>Konv. Kreator</span><b>25%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp488,20JT</b></div>
-            <div><span>Terjual</span><b>1828</b></div>
-            <div><span>Rating</span><b>4.7</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1734436543180211485">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1734436543180211485?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_0_4">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Sepatu · #5 </div>
-          <h2>EMOE - BUBBLE REFLEKTIVE Sneakers Pria Wanita Sepatu Kasual Hitam Reflektif Elegan Shoes Karet Casual Unisex Low Cut Kanvas Double Foam Mesh Suede - Black Reflektif</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Sneaker reflektif hitam — detail reflektif jadi hook visual kece buat video malam hari. Rating 4.9, konversi 40%.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp336,70RB</b></div>
-            <div><span>Avg Price</span><b>Rp336,70RB</b></div>
-            <div><span>Komisi</span><b class="accent">8%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-77.9%</b></div>
-            <div><span>Konv. Kreator</span><b>40%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp411,78JT</b></div>
-            <div><span>Terjual</span><b>1223</b></div>
-            <div><span>Rating</span><b>4.9</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1730518787912008881">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1730518787912008881?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_1_0">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Tas · #1 </div>
-          <h2>Hefand - Handbag Pria Aero Elite Tas Selempang Pria Clucth Bag Tas Tangan Pria Hand Bag Tas Slempang Cowok Kulit Waterproof</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Clutch/selempang pria premium look, revenue #1 di kategori tas. Angle: 'isi tas cowok' / daily carry minimalis.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp229,26RB</b></div>
-            <div><span>Avg Price</span><b>Rp229,26RB</b></div>
-            <div><span>Komisi</span><b class="accent">10%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-51.6%</b></div>
-            <div><span>Konv. Kreator</span><b>26%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp402,12JT</b></div>
-            <div><span>Terjual</span><b>1754</b></div>
-            <div><span>Rating</span><b>4.9</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1729646785650919121">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1729646785650919121?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_1_1">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Tas · #2 </div>
-          <h2>BAYT | Niza ultiMAX handbag pria clutch dompet hp waterproof Zipper Hitam</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Clutch multifungsi muat HP, waterproof, cuma Rp133rb — price point ramah + sale 3.008 pcs. Konten: demo kapasitas &amp; anti air.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp133,66RB</b></div>
-            <div><span>Avg Price</span><b>Rp133,66RB</b></div>
-            <div><span>Komisi</span><b class="accent">10%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-36.2%</b></div>
-            <div><span>Konv. Kreator</span><b>22%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp402,06JT</b></div>
-            <div><span>Terjual</span><b>3008</b></div>
-            <div><span>Rating</span><b>4.9</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1729676834961132308">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1729676834961132308?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_1_2">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Tas · #3 </div>
-          <h2>GUVDIV  Tas Selempang Santai dan Sporty Tas Laptop Unisex Banyak Kantong Tahan Air dan Tahan Lama Sekolah Pria Kanvas Kulit Canvas</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Sling bag sporty muat laptop, unisex. Angle: tas kuliah/kerja ringkas, demo muat laptop + gadget.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp222,48RB</b></div>
-            <div><span>Avg Price</span><b>Rp222,48RB</b></div>
-            <div><span>Komisi</span><b class="accent">10%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-71.5%</b></div>
-            <div><span>Konv. Kreator</span><b>26%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp352,64JT</b></div>
-            <div><span>Terjual</span><b>1585</b></div>
-            <div><span>Rating</span><b>4.9</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1731004409005442082">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1731004409005442082?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_1_3">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Tas · #4 </div>
-          <h2>Harmits  - Tablet 11 Inch TOKYO Clutch Bag Cowok Anti Air Anti Api  Pria Wanita UNISEX</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Clutch muat tablet 11 inci + anti air, konversi kreator 59% (tertinggi di kategori tas) = gampang closing. Angle: tas tech-carry.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp190,99RB</b></div>
-            <div><span>Avg Price</span><b>Rp190,99RB</b></div>
-            <div><span>Komisi</span><b class="accent">10%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-56.1%</b></div>
-            <div><span>Konv. Kreator</span><b>59%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp346,26JT</b></div>
-            <div><span>Terjual</span><b>1813</b></div>
-            <div><span>Rating</span><b>4.9</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1729867806206494909">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1729867806206494909?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_1_4">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Tas · #5 · 🔥 3 Second</div>
-          <h2>3Second Tas Pinggang Pria Waist Bag Polyester Caelum OL-C061124</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Waist bag brand 3Second — ADA DI INVENTORY, bisa langsung konten pakai stok sendiri. Angle: waist bag streetwear buat gaya sporty.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp328,72RB</b></div>
-            <div><span>Avg Price</span><b>Rp328,72RB</b></div>
-            <div><span>Komisi</span><b class="accent">9%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-83.8%</b></div>
-            <div><span>Konv. Kreator</span><b>37%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp334,31JT</b></div>
-            <div><span>Terjual</span><b>1017</b></div>
-            <div><span>Rating</span><b>4.9</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1730448663060776554">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1730448663060776554?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_2_0">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Jaket &amp; Mantel · #1 </div>
-          <h2>Detroit Work Jacket boxy crop, Jacket Pria bahan Kanvas jaket</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Work jacket boxy crop bahan kanvas — komisi 15% TERTINGGI se-report + growth cuma -6,8% (paling stabil, momentum masih kuat). Rev 807jt. Prioritas konten #1.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp354,92RB</b></div>
-            <div><span>Avg Price</span><b>Rp354,92RB</b></div>
-            <div><span>Komisi</span><b class="accent">15%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-6.8%</b></div>
-            <div><span>Konv. Kreator</span><b>21%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp807,08JT</b></div>
-            <div><span>Terjual</span><b>2274</b></div>
-            <div><span>Rating</span><b>4.8</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1729740009264023066">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1729740009264023066?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_2_1">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Jaket &amp; Mantel · #2 · 🔥 Screamous</div>
-          <h2>[BEST SELLER] Screamous WindBreaker Jacket HAMESH BLACK</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Windbreaker Screamous — ADA DI INVENTORY, brand lokal ternama, stok ready jadi bisa langsung produksi. Catatan: konversi kreator baru 7%, butuh angle kuat.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp375,90RB</b></div>
-            <div><span>Avg Price</span><b>Rp375,90RB</b></div>
-            <div><span>Komisi</span><b class="accent">9%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-47.5%</b></div>
-            <div><span>Konv. Kreator</span><b>7%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp605,95JT</b></div>
-            <div><span>Terjual</span><b>1612</b></div>
-            <div><span>Rating</span><b>4.8</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1734428369708942500">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1734428369708942500?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_2_2">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Jaket &amp; Mantel · #3 </div>
-          <h2>Greenlight Jaket Parka Pria Regular Fit Baby Canvas Elion OL-CG110426</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Parka Greenlight baby canvas, kreator baru CUMA 52 = kompetisi super longgar + konversi 67% tinggi. Early mover kuat, buruan sebelum rame.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp318,40RB</b></div>
-            <div><span>Avg Price</span><b>Rp318,40RB</b></div>
-            <div><span>Komisi</span><b class="accent">9%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-77.4%</b></div>
-            <div><span>Konv. Kreator</span><b>67%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp434,62JT</b></div>
-            <div><span>Terjual</span><b>1365</b></div>
-            <div><span>Rating</span><b>4.9</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1734691071219369598">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1734691071219369598?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_2_3">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Jaket &amp; Mantel · #4 </div>
-          <h2>Dobujack Jacket Reversible Holly Black</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Jaket reversible (2 sisi) — hook konten jelas: 1 jaket 2 tampilan. Demo bolak-balik sisi = konten gampang viral.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp284,18RB</b></div>
-            <div><span>Avg Price</span><b>Rp284,18RB</b></div>
-            <div><span>Komisi</span><b class="accent">10%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-39.3%</b></div>
-            <div><span>Konv. Kreator</span><b>11%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp403,54JT</b></div>
-            <div><span>Terjual</span><b>1420</b></div>
-            <div><span>Rating</span><b>4.8</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1729674796143904649">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1729674796143904649?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_2_4">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Jaket &amp; Mantel · #5 </div>
-          <h2>Noree. Jaket Boxy Canvas Work Jaket Vintage Breadley - UNISEX</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Work jacket vintage boxy, produk relatif baru launch. Angle: gaya workwear/vintage yang lagi naik, harga paling ramah di kategori jaket (Rp263rb).</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp263,61RB</b></div>
-            <div><span>Avg Price</span><b>Rp263,61RB</b></div>
-            <div><span>Komisi</span><b class="accent">9%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-43.3%</b></div>
-            <div><span>Konv. Kreator</span><b>24%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp346,39JT</b></div>
-            <div><span>Terjual</span><b>1314</b></div>
-            <div><span>Rating</span><b>4.9</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1735701530782172992">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1735701530782172992?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_3_0">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Pakaian Dalam · #1 </div>
-          <h2>【beli 4 gratis 2】S9002 French men's sports underwear marathon professional running underwear anti-wear quick-drying underwear randomly matched Fit Soft Boxer Seamless Basicbeli Mini</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Boxer olahraga 'beli 4 gratis 2' — revenue Rp1,10 MILIAR, terlaris se-report (7.250 pcs) + growth stabil -0,4%. Bundling gede naikin AOV. Konten value-for-money.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp152,16RB</b></div>
-            <div><span>Avg Price</span><b>Rp152,16RB</b></div>
-            <div><span>Komisi</span><b class="accent">10%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-0.4%</b></div>
-            <div><span>Konv. Kreator</span><b>34%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp1,10M</b></div>
-            <div><span>Terjual</span><b>7250</b></div>
-            <div><span>Rating</span><b>4.8</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1729738127311209498">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1729738127311209498?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_3_1">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Pakaian Dalam · #2 </div>
-          <h2>PROMO !!! (PAKET ISI 6pcs) Celana Dalam Boxer Pria Premium Anti Bakteri | Nyaman &amp; Elastis</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Paket 6 boxer premium, konversi kreator 71% TERTINGGI di report — gampang banget closing. Angle: hitung-hitungan harga per pcs super murah.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp141,18RB</b></div>
-            <div><span>Avg Price</span><b>Rp141,18RB</b></div>
-            <div><span>Komisi</span><b class="accent">10%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-32.4%</b></div>
-            <div><span>Konv. Kreator</span><b>71%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp690,49JT</b></div>
-            <div><span>Terjual</span><b>4891</b></div>
-            <div><span>Rating</span><b>4.9</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1733909616736896518">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1733909616736896518?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_3_2">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Pakaian Dalam · #3 </div>
-          <h2>3/6pcs UOMO Pakaian dalam olahraga kelas atas Boxer Fit Dewasa Pria bahan ditingkatkan lembut Paket 6 Pcs Celana Dalam Olahraga Anak Laki-laki</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Boxer olahraga UOMO paket 3/6pcs, harga super ramah Rp103rb, konversi 53%. Konten: nyaman buat aktivitas/gym.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp103,71RB</b></div>
-            <div><span>Avg Price</span><b>Rp103,71RB</b></div>
-            <div><span>Komisi</span><b class="accent">10%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-48.7%</b></div>
-            <div><span>Konv. Kreator</span><b>53%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp439,64JT</b></div>
-            <div><span>Terjual</span><b>4239</b></div>
-            <div><span>Rating</span><b>4.8</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1729739310160839706">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1729739310160839706?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_3_3">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Pakaian Dalam · #4 </div>
-          <h2>[PROMO] VAUDREÉ - PAKET HEMAT ISI 4 PCS Celana Dalam Boxer Pria Ice Silk Lembut Dingin Antibakteri Nyaman Dewasa Seamless Premium</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Paket 4 boxer Rp89rb, salah satu dari sedikit produk growth POSITIF (+1,8%) — momentum lagi naik. Konversi 59%.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp89,02RB</b></div>
-            <div><span>Avg Price</span><b>Rp89,02RB</b></div>
-            <div><span>Komisi</span><b class="accent">10%</b></div>
-            <div><span>Growth 30hr</span><b class="pos">1.8%</b></div>
-            <div><span>Konv. Kreator</span><b>59%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp375,56JT</b></div>
-            <div><span>Terjual</span><b>4219</b></div>
-            <div><span>Rating</span><b>4.6</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1730289531401569985">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1730289531401569985?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_3_4">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Pakaian Dalam · #5 </div>
-          <h2>PAKET 4 PCS Celana Dalam Pria Boxer Motif corak Because Poliester Spandek CDP108 Sholadia</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Paket 4 boxer motif corak, termurah di report (Rp80rb). Angle: motif fun + value banget. Konversi 60%.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp80,93RB</b></div>
-            <div><span>Avg Price</span><b>Rp80,93RB</b></div>
-            <div><span>Komisi</span><b class="accent">10%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-60.4%</b></div>
-            <div><span>Konv. Kreator</span><b>60%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp370,35JT</b></div>
-            <div><span>Terjual</span><b>4576</b></div>
-            <div><span>Rating</span><b>4.6</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1730971875329148276">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1730971875329148276?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_4_0">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Kacamata · #1 </div>
-          <h2>Kacamata Sunglasses Frame Kotak PD28812 Polarized Anti UV-400 Protection - Kacamata Fashion Tren - Kacamata Gaya Terbaru Fullset</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Sunglasses frame kotak polarized anti-UV, revenue #1 kategori kacamata (568jt). Angle: styling sunnies + demo lensa polarized anti silau.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp186,56RB</b></div>
-            <div><span>Avg Price</span><b>Rp186,56RB</b></div>
-            <div><span>Komisi</span><b class="accent">9%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-67.5%</b></div>
-            <div><span>Konv. Kreator</span><b>33%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp568,08JT</b></div>
-            <div><span>Terjual</span><b>3045</b></div>
-            <div><span>Rating</span><b>4.8</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1732153348567172686">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1732153348567172686?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_4_1">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Kacamata · #2 </div>
-          <h2>Kacamata Hitam Dalwa Fotokromik, Visi Siang dan Malam, untuk Berkemudi di Hujan, Lensa Berubah Warna dan Terpolarisasi, Anti-Silau, Bingkai Fleksibel TR90 untuk Pria, Kacamata Mengemudi &amp; Memancing, Pelindung UV400, untuk Olahraga Luar Ruangan</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Kacamata fotokromik Dalwa — lensa berubah gelap/terang otomatis, bisa siang &amp; malam. Hook: demo transisi lensa, 1 kacamata segala kondisi.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp167,02RB</b></div>
-            <div><span>Avg Price</span><b>Rp167,02RB</b></div>
-            <div><span>Komisi</span><b class="accent">10%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-34.6%</b></div>
-            <div><span>Konv. Kreator</span><b>34%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp461,80JT</b></div>
-            <div><span>Terjual</span><b>2765</b></div>
-            <div><span>Rating</span><b>4.9</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1734305536254510678">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1734305536254510678?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_4_2">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Kacamata · #3 </div>
-          <h2>【FLEKSIBEL】Dalwa Kacamata Driving Fotokromik Terpolarisasi Anti UV400 360° Guard - Kacamata Hitam Pria Premium untuk Hiking | Fishing | Olahraga Outdoor, UKURAN UNIVERSAL Cocok Semua Bentuk Wajah Eyewear Sunglasses</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Versi driving Dalwa, fotokromik + polarized khusus nyetir. Angle: review buat pengendara, anti silau lampu &amp; matahari.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp254,43RB</b></div>
-            <div><span>Avg Price</span><b>Rp254,43RB</b></div>
-            <div><span>Komisi</span><b class="accent">10%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-53.7%</b></div>
-            <div><span>Konv. Kreator</span><b>34%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp440,41JT</b></div>
-            <div><span>Terjual</span><b>1731</b></div>
-            <div><span>Rating</span><b>4.8</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1731688775140083286">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1731688775140083286?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_4_3">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Kacamata · #4 </div>
-          <h2>Kacamata Progresif Baca &amp; Jalan dengan Lensa Warna Anti UV untuk Pria Wanita +100 s/d +300 Gratis Box Lap Viber Cairan Pembersih Lensa Eyewear Glasses</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Kacamata progresif (baca + jalan dalam 1 lensa), kreator baru 84 = kompetisi longgar. Angle: solusi praktis buat yang butuh baca &amp; lihat jauh.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp165,71RB</b></div>
-            <div><span>Avg Price</span><b>Rp165,71RB</b></div>
-            <div><span>Komisi</span><b class="accent">8%</b></div>
-            <div><span>Growth 30hr</span><b class="neg">-57.8%</b></div>
-            <div><span>Konv. Kreator</span><b>49%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp420,41JT</b></div>
-            <div><span>Terjual</span><b>2537</b></div>
-            <div><span>Rating</span><b>4.7</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1731718521118099334">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1731718521118099334?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
-      </div><div class="modal" id="m_4_4">
-        <div class="modal-bg" data-close="1"></div>
-        <div class="modal-box">
-          <button class="mclose" data-close="1">&times;</button>
-          <div class="mcat">Kacamata · #5 </div>
-          <h2>【GM-Plot 2370 Kacamata (Buy 1 Get 5)】【Eksklusif &amp; Premium Gift Box】 Kacamata hitam wanita/ Sunglasses/ Titanium/UV /Produk Baru/ Kacamata Fashion/ Tanpa Bingkai/ Bingkai Penuh/ Pelindung Ultraviolet/ Versi Korea /Kualitas Tinggi /Kacamata Terpolarisasi</h2>
-          <div class="usp"><div class="usp-l">USP / Nilai Jual</div><p>Buy 1 Get 5 kacamata, kreator baru CUMA 40 + growth POSITIF +7% = early mover terkuat di kategori. Bundling 6 pcs = hook value gede. Prioritas.</p></div>
-          <div class="mgrid">
-            <div><span>Harga</span><b>Rp154,78RB</b></div>
-            <div><span>Avg Price</span><b>Rp154,78RB</b></div>
-            <div><span>Komisi</span><b class="accent">9%</b></div>
-            <div><span>Growth 30hr</span><b class="pos">7%</b></div>
-            <div><span>Konv. Kreator</span><b>50%</b></div>
-            <div><span>Revenue 30hr</span><b>Rp417,90JT</b></div>
-            <div><span>Terjual</span><b>2700</b></div>
-            <div><span>Rating</span><b>4.9</b></div>
-          </div>
-          <div class="mlinks">
-            <a class="btn btn-kalo" target="_blank" rel="noopener" href="https://www.kalodata.com/product/detail?id=1729993614200572197">📊 Kalodata Detail</a>
-            <a class="btn btn-tts" target="_blank" rel="noopener" href="https://shop.tiktok.com/view/product/1729993614200572197?region=ID&locale=id-ID&source=agency">🛒 TikTok Shop</a>
-          </div>
-        </div>
+<div class="tabs"><button class="tab active" onclick="showTab('atasan',this)">Atasan Pria <span class="tcount">5</span></button><button class="tab" onclick="showTab('khusus',this)">Pakaian Khusus Pria <span class="tcount">5</span></button><button class="tab" onclick="showTab('parfum',this)">Parfum Pria <span class="tcount">5</span></button><button class="tab" onclick="showTab('jam',this)">Jam Tangan Pria <span class="tcount">5</span></button><button class="tab" onclick="showTab('perawatan',this)">Perawatan Pria <span class="tcount">5</span></button></div>
+<div class="panel active" id="panel-atasan"><div class="grid"><div class="card" data-id="1734367089693787275" onclick="openModal('1734367089693787275')">
+      <div class="crank">#1</div>
+      <div class="ctitle">Buy 1 get (4 kaos 1 tumbler) distro motif terbaru fashion bahan semi katun 24s cowok cewek dewasa unisex pria wanita atasan keren  Baju Oblong Sablon T-Shirt Pendek Lembut</div>
+      <div class="cbrand">Buy</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp334,64RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">10%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="pos">5%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp2,14M</b></div>
+        <div class="m"><span>Kreator</span><b>23</b></div>
+        <div class="m"><span>Terjual</span><b>6391</b></div>
       </div>
-<footer>Automated Research Report · Powered by Kalodata + Inventory Cross-Check</footer>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1736235541570356517" onclick="openModal('1736235541570356517')">
+      <div class="crank">#2 <span class="binv">🔥 Inventory</span></div>
+      <div class="ctitle">[DISKON EXLUSIVE  HARI INI ] BELI 1 DAPAT 2 KAOS  TERBATAS T-SHIRT DREAMSTORY COTTON Combed 24s HIGH QUALITY LEMBUT COMFY</div>
+      <div class="cbrand">BELI</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp153,58RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">8%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="neg">-40%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp917,04JT</b></div>
+        <div class="m"><span>Kreator</span><b>134</b></div>
+        <div class="m"><span>Terjual</span><b>5971</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1729740009264023066" onclick="openModal('1729740009264023066')">
+      <div class="crank">#3</div>
+      <div class="ctitle">Detroit Work Jacket boxy crop, Jacket Pria bahan Kanvas jaket</div>
+      <div class="cbrand">Detroit</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp354,90RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">15%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="neg">-4.9%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp842,17JT</b></div>
+        <div class="m"><span>Kreator</span><b>165</b></div>
+        <div class="m"><span>Terjual</span><b>2373</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1732828164359947557" onclick="openModal('1732828164359947557')">
+      <div class="crank">#4 <span class="binv">🔥 Inventory</span></div>
+      <div class="ctitle">[ PROMO MINGGU GUNCANG ] PROMO BUNDLING Beli 1 Dapat 2 kaos DREAMSTORY Cotton Combed 24s High Quality Halus Lembut Comfy</div>
+      <div class="cbrand">PROMO</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp365,63RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">8%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="pos">&gt;999.9%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp805,86JT</b></div>
+        <div class="m"><span>Kreator</span><b>54</b></div>
+        <div class="m"><span>Terjual</span><b>2204</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1736384939348756007" onclick="openModal('1736384939348756007')">
+      <div class="crank">#5</div>
+      <div class="ctitle">(Gratis Sticker,Paperbag) Buy 1 Get 2 Ngab Kaos Baju Distro Spesial Bundling Super Keren Silent Instinct v2 &amp; Thronbound BD102 Hitam Unisex Pria Wanita Cotton Combed 24s</div>
+      <div class="cbrand">Buy</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp252,49RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">10%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="neg">-15.6%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp704,18JT</b></div>
+        <div class="m"><span>Kreator</span><b>87</b></div>
+        <div class="m"><span>Terjual</span><b>2789</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div></div></div><div class="panel" id="panel-khusus"><div class="grid"><div class="card" data-id="1730762359539271544" onclick="openModal('1730762359539271544')">
+      <div class="crank">#1</div>
+      <div class="ctitle">Batik KORPRI Premium Lapis Furing Full Motif Resmi ASN PNS Pria Wanita Seragam KORPRI Nasional</div>
+      <div class="cbrand">Batik</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp139,88RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">8%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="pos">74.2%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp109,67JT</b></div>
+        <div class="m"><span>Kreator</span><b>121</b></div>
+        <div class="m"><span>Terjual</span><b>784</b></div>
+      </div>
+      <div class="cflag">⚠️ Niche formal (ASN/PNS), bukan streetwear</div>
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1729633110735029292" onclick="openModal('1729633110735029292')">
+      <div class="crank">#2</div>
+      <div class="ctitle">[Duffy toys] (bisa berkedip)Topeng Mask Spiderman Headgear Superhero Chin Control Cosplay/ Spiderman No Way Home Party Hats &amp; Masks/ Hadiah Anak-anak Dewasa</div>
+      <div class="cbrand">(bisa</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp312,56RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">8%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="neg">-84.4%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp99,08JT</b></div>
+        <div class="m"><span>Kreator</span><b>37</b></div>
+        <div class="m"><span>Terjual</span><b>317</b></div>
+      </div>
+      <div class="cflag">⚠️ OFF-NICHE (mainan/kostum) + growth -84%</div>
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1732461949737928464" onclick="openModal('1732461949737928464')">
+      <div class="crank">#3</div>
+      <div class="ctitle">Kemeja Taktikal M-TAC Safety Baju Panjang Wearpack Pria Cotton Drill Panjang Atasan Terbaru Termurah</div>
+      <div class="cbrand">Kemeja</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp106,93RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">10%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="neg">-8%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp93,99JT</b></div>
+        <div class="m"><span>Kreator</span><b>86</b></div>
+        <div class="m"><span>Terjual</span><b>879</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1732550490948470301" onclick="openModal('1732550490948470301')">
+      <div class="crank">#4</div>
+      <div class="ctitle">MOC - Kemeja Batik Pria Lengan Pendek Mahayana - White</div>
+      <div class="cbrand">MOC</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp271,76RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">8%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="pos">398.5%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp79,90JT</b></div>
+        <div class="m"><span>Kreator</span><b>25</b></div>
+        <div class="m"><span>Terjual</span><b>294</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1730201557376205868" onclick="openModal('1730201557376205868')">
+      <div class="crank">#5</div>
+      <div class="ctitle">【Duffy toys】（Bisa Berkedip）Topeng Spiderman Mask / Topeng Mask Spiderman Headgear Superhero Chin Control Cosplay / Spiderman No Way Home Party Hats &amp; Masks / Hadiah Anak-anak Dewasa  / Topeng Spiderman Anak / Topeng Spiderman Dewasa/Topeng Spiderman Merah</div>
+      <div class="cbrand">（Bisa</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp273,83RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">8%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="neg">-83.5%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp78,59JT</b></div>
+        <div class="m"><span>Kreator</span><b>72</b></div>
+        <div class="m"><span>Terjual</span><b>287</b></div>
+      </div>
+      <div class="cflag">⚠️ OFF-NICHE (mainan/kostum) + growth -83%</div>
+      <div class="cmore">Lihat detail & link →</div>
+    </div></div></div><div class="panel" id="panel-parfum"><div class="grid"><div class="card" data-id="1729642417705356114" onclick="openModal('1729642417705356114')">
+      <div class="crank">#1</div>
+      <div class="ctitle">MALE ( ISI 6 AROMA ) PARFUM EXCLUSIVE MALE/MEN SERIES 30 ML Perfume Wangi Pria Cowok Mewah Wangi</div>
+      <div class="cbrand">MALE</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp89,52RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">8%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="neg">-25.8%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp656,74JT</b></div>
+        <div class="m"><span>Kreator</span><b>133</b></div>
+        <div class="m"><span>Terjual</span><b>7336</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1729588505159697608" onclick="openModal('1729588505159697608')">
+      <div class="crank">#2</div>
+      <div class="ctitle">Scentplus Day  - S Effect Wild Extrait de Parfum | Parfum Premium Tahan Lama- Fresh, Sweet</div>
+      <div class="cbrand">Scentplus</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp129,29RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">9%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="neg">-78%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp272,80JT</b></div>
+        <div class="m"><span>Kreator</span><b>146</b></div>
+        <div class="m"><span>Terjual</span><b>2110</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1733229741140051563" onclick="openModal('1733229741140051563')">
+      <div class="crank">#3</div>
+      <div class="ctitle">3 Botol parfum pria mark him BPOM luxury, sporty dan romantic cocok untuk indoor outdoor dan acara penting, perfume EDP pria mewah elegan High Value pria mapan</div>
+      <div class="cbrand">—</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp86,29RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">8%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="neg">-85.8%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp262,85JT</b></div>
+        <div class="m"><span>Kreator</span><b>190</b></div>
+        <div class="m"><span>Terjual</span><b>3046</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1729598159908537784" onclick="openModal('1729598159908537784')">
+      <div class="crank">#4</div>
+      <div class="ctitle">Heaven Scent SBY - God of Heaven 50ml Parfum  Pria</div>
+      <div class="cbrand">Heaven</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp157,53RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">10%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="neg">-1.3%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp236,77JT</b></div>
+        <div class="m"><span>Kreator</span><b>114</b></div>
+        <div class="m"><span>Terjual</span><b>1503</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1734423718810846344" onclick="openModal('1734423718810846344')">
+      <div class="crank">#5</div>
+      <div class="ctitle">[NEW] HEURA 8PM - Extrait de Parfum - Aroma Nanas Fruity Fresh Segar Manis Maskulin Parfum Pria Tahan Lama</div>
+      <div class="cbrand">HEURA</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp147,11RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">10%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="neg">-100%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp173,30JT</b></div>
+        <div class="m"><span>Kreator</span><b>154</b></div>
+        <div class="m"><span>Terjual</span><b>1178</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div></div></div><div class="panel" id="panel-jam"><div class="grid"><div class="card" data-id="1729383339304126388" onclick="openModal('1729383339304126388')">
+      <div class="crank">#1</div>
+      <div class="ctitle">【003 Harga telah diganti, cepat beli】BIDEN Jam Tangan Olahraga Kuarsa Otomatis Date Tali Stainless Steel Kasual Pria Anti Air Watches Original YN0012</div>
+      <div class="cbrand">BIDEN</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp182,99RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">13%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="neg">-63.9%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp473,41JT</b></div>
+        <div class="m"><span>Kreator</span><b>93</b></div>
+        <div class="m"><span>Terjual</span><b>2587</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1731892609744077949" onclick="openModal('1731892609744077949')">
+      <div class="crank">#2</div>
+      <div class="ctitle">【003 Harga telah diganti, cepat beli】Sunlifex Jam Tangan Pria Naga Emas Stainless Steel Quartz Original Dragon Gold Kuning Jam Tangan Cowok SL9002</div>
+      <div class="cbrand">Sunlifex</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp81,57RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">10%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="pos">50.3%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp312,15JT</b></div>
+        <div class="m"><span>Kreator</span><b>91</b></div>
+        <div class="m"><span>Terjual</span><b>3827</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1731767243265705802" onclick="openModal('1731767243265705802')">
+      <div class="crank">#3</div>
+      <div class="ctitle">Aiyishi Jam Tangan Pria Dial BeronggaKuarsa Anti Air Tali Stainless Steel Jam TanganCowok Watches Original AY1806</div>
+      <div class="cbrand">Aiyishi</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp80,40RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">8%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="pos">28%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp157,74JT</b></div>
+        <div class="m"><span>Kreator</span><b>163</b></div>
+        <div class="m"><span>Terjual</span><b>1962</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1730805193097053659" onclick="openModal('1730805193097053659')">
+      <div class="crank">#4</div>
+      <div class="ctitle">(002 Harga Telah Diganti, Cepat Beli) Jam Tangan Pria Mewah POSHI Skeleton Dial Tahan Air Fungsi Kalender &amp; Bisnis Bahan Stainless Steel - Watches</div>
+      <div class="cbrand">Jam</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp147,25RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">8%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="neg">-25.2%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp148,14JT</b></div>
+        <div class="m"><span>Kreator</span><b>137</b></div>
+        <div class="m"><span>Terjual</span><b>1006</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1737234102378464692" onclick="openModal('1737234102378464692')">
+      <div class="crank">#5</div>
+      <div class="ctitle">PhiLipe Ricci Jam Tangan Pria Rantai Simple Kasual Kekinian Adjustable 100% Original 3838 Men Watch</div>
+      <div class="cbrand">PhiLipe</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp112,77RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">10%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="neg">-46.6%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp129,24JT</b></div>
+        <div class="m"><span>Kreator</span><b>199</b></div>
+        <div class="m"><span>Terjual</span><b>1146</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div></div></div><div class="panel" id="panel-perawatan"><div class="grid"><div class="card" data-id="1733047160950130597" onclick="openModal('1733047160950130597')">
+      <div class="crank">#1</div>
+      <div class="ctitle">SOLLOSA HYDRA GEL ORIGINAL FOR MAN BISA COD</div>
+      <div class="cbrand">SOLLOSA</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp126,85RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">20%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="pos">&gt;999.9%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp947,48JT</b></div>
+        <div class="m"><span>Kreator</span><b>42</b></div>
+        <div class="m"><span>Terjual</span><b>7469</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1737390032481060213" onclick="openModal('1737390032481060213')">
+      <div class="crank">#2</div>
+      <div class="ctitle">SODOXIN FOR MEN KEMASAN ROLL ON 10ML PRAKTIS EFECTIFE (BACA DESKRIPSI)</div>
+      <div class="cbrand">SODOXIN</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp111,83RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">20%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="pos">&gt;999.9%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp771,75JT</b></div>
+        <div class="m"><span>Kreator</span><b>9</b></div>
+        <div class="m"><span>Terjual</span><b>6901</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1735212027981235823" onclick="openModal('1735212027981235823')">
+      <div class="crank">#3</div>
+      <div class="ctitle">Garnier Men Facial Foam 100ml (x5) - Pack of 5 Facial Cleanser</div>
+      <div class="cbrand">Garnier</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp135,97RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">8%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="neg">-66.5%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp618,55JT</b></div>
+        <div class="m"><span>Kreator</span><b>83</b></div>
+        <div class="m"><span>Terjual</span><b>4549</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1736330422769124793" onclick="openModal('1736330422769124793')">
+      <div class="crank">#4</div>
+      <div class="ctitle">【KOL】Shuluoda Skin Freshness Spray perawatan pria 30ml Formula Botanikal Alami Lembut merawat Kulit</div>
+      <div class="cbrand">Shuluoda</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp66,54RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">8%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="pos">38.2%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp501,35JT</b></div>
+        <div class="m"><span>Kreator</span><b>67</b></div>
+        <div class="m"><span>Terjual</span><b>7534</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div><div class="card" data-id="1729385431554361058" onclick="openModal('1729385431554361058')">
+      <div class="crank">#5</div>
+      <div class="ctitle">Paket POWERFULL WHITENING Body Lotion + POWERFULL WHITENING Body Booster Osyin Glow</div>
+      <div class="cbrand">Paket</div>
+      <div class="cmetrics">
+        <div class="m"><span>Harga</span><b>Rp187,19RB</b></div>
+        <div class="m"><span>Komisi</span><b class="acc">10%</b></div>
+        <div class="m"><span>Growth 30h</span><b class="neg">-61.2%</b></div>
+        <div class="m"><span>Revenue 30h</span><b>Rp497,93JT</b></div>
+        <div class="m"><span>Kreator</span><b>107</b></div>
+        <div class="m"><span>Terjual</span><b>2660</b></div>
+      </div>
+      
+      <div class="cmore">Lihat detail & link →</div>
+    </div></div></div>
+<footer>Automated Research Report · Powered by Kalodata + Inventory Cross-Check<br>Filter: harga Rp20rb&ndash;400rb · komisi &ge;8% · kreator &le;200 · rank revenue 30hr</footer>
+</div>
+<div class="overlay" id="overlay" onclick="if(event.target===this)closeModal()">
+  <div class="modal"><div id="modalBody"></div></div>
 </div>
 <script>
-document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
-  const i=t.dataset.tab;
-  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x.dataset.tab===i));
-  document.querySelectorAll('.panel').forEach(x=>x.classList.toggle('active',x.dataset.panel===i));
-}));
-document.querySelectorAll('.card').forEach(c=>c.addEventListener('click',()=>{
-  const m=document.getElementById('m_'+c.dataset.modal); if(m)m.classList.add('open');
-}));
-document.querySelectorAll('[data-close]').forEach(b=>b.addEventListener('click',()=>{
-  b.closest('.modal').classList.remove('open');
-}));
-document.addEventListener('keydown',e=>{if(e.key==='Escape')document.querySelectorAll('.modal.open').forEach(m=>m.classList.remove('open'));});
+var MD={"1734367089693787275":"<div class=\"mhead\"><h3>Buy 1 get (4 kaos 1 tumbler) distro motif terbaru fashion bahan semi katun 24s cowok cewek dewasa unisex pria wanita atasan keren  Baju Oblong Sablon T-Shirt Pendek Lembut</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>Buy</b> · Peringkat #1 Atasan Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp334,64RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">10%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"pos\">5%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp2,14M</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>23</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>30%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>6391</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.7</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>Paket bundling value gede: 4 kaos + 1 tumbler bahan semi katun 24s yang adem. Revenue #1 atasan (Rp2,14M). Angle konten: GRWM/haul 1 paket jadi banyak outfit, cocok buat video unboxing bundling.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1734367089693787275\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1734367089693787275?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1736235541570356517":"<div class=\"mhead\"><h3>[DISKON EXLUSIVE  HARI INI ] BELI 1 DAPAT 2 KAOS  TERBATAS T-SHIRT DREAMSTORY COTTON Combed 24s HIGH QUALITY LEMBUT COMFY</h3><span class=\"binv\">🔥 Ada di Inventory</span></div>\n      <div class=\"mbrand\">Brand/Seller: <b>BELI</b> · Peringkat #2 Atasan Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp153,58RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">8%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"neg\">-40%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp917,04JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>134</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>53%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>5971</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.8</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>Brand DreamStory yang udah READY di inventory lo (cotton combed basic, gampang di-styling). Buy 1 Get 2 jadi value tinggi. Angle: mix-match 1 kaos polos 3 gaya berbeda.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1736235541570356517\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1736235541570356517?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1729740009264023066":"<div class=\"mhead\"><h3>Detroit Work Jacket boxy crop, Jacket Pria bahan Kanvas jaket</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>Detroit</b> · Peringkat #3 Atasan Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp354,90RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">15%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"neg\">-4.9%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp842,17JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>165</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>21%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>2373</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.8</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>Detroit Work Jacket boxy crop bahan kanvas, workwear look yang lagi naik. Komisi 15% TERTINGGI se-report = paling cuan per closing. Angle: 1 jaket buat 3 occasion / layering cowok.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1729740009264023066\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1729740009264023066?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1732828164359947557":"<div class=\"mhead\"><h3>[ PROMO MINGGU GUNCANG ] PROMO BUNDLING Beli 1 Dapat 2 kaos DREAMSTORY Cotton Combed 24s High Quality Halus Lembut Comfy</h3><span class=\"binv\">🔥 Ada di Inventory</span></div>\n      <div class=\"mbrand\">Brand/Seller: <b>PROMO</b> · Peringkat #4 Atasan Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp365,63RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">8%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"pos\">&gt;999.9%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp805,86JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>54</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>69%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>2204</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.8</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>Varian DreamStory lain yang lagi MELEDAK (growth &gt;999%) + konversi kreator 69% = gampang closing. Ready di inventory. Angle: restock haul / review bahan cotton combed 24s.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1732828164359947557\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1732828164359947557?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1736384939348756007":"<div class=\"mhead\"><h3>(Gratis Sticker,Paperbag) Buy 1 Get 2 Ngab Kaos Baju Distro Spesial Bundling Super Keren Silent Instinct v2 &amp; Thronbound BD102 Hitam Unisex Pria Wanita Cotton Combed 24s</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>Buy</b> · Peringkat #5 Atasan Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp252,49RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">10%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"neg\">-15.6%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp704,18JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>87</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>47%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>2789</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.7</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>Bundling kaos distro Buy 1 Get 2 free sticker + paperbag, konversi kreator 47%. Angle: konten unboxing estetik, highlight free merch-nya.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1736384939348756007\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1736384939348756007?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1730762359539271544":"<div class=\"mhead\"><h3>Batik KORPRI Premium Lapis Furing Full Motif Resmi ASN PNS Pria Wanita Seragam KORPRI Nasional</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>Batik</b> · Peringkat #1 Pakaian Khusus Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp139,88RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">8%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"pos\">74.2%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp109,67JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>121</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>21%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>784</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.7</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>Batik KORPRI premium lapis furing, momentum NAIK +74%. Seasonal untuk ASN/PNS. Angle: OOTD batik kondangan/kantor. Catatan: niche agak formal, bukan daily streetwear.</p></div>\n      <div class=\"mflag\">⚠️ Niche formal (ASN/PNS), bukan streetwear</div>\n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1730762359539271544\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1730762359539271544?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1729633110735029292":"<div class=\"mhead\"><h3>[Duffy toys] (bisa berkedip)Topeng Mask Spiderman Headgear Superhero Chin Control Cosplay/ Spiderman No Way Home Party Hats &amp; Masks/ Hadiah Anak-anak Dewasa</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>(bisa</b> · Peringkat #2 Pakaian Khusus Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp312,56RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">8%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"neg\">-84.4%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp99,08JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>37</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>62%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>317</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.8</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>Topeng Spiderman bisa berkedip. FLAG: ini mainan/kostum, OFF-NICHE buat fashion pria + growth -84% (momentum udah lewat). Include sesuai aturan tapi bukan prioritas konten.</p></div>\n      <div class=\"mflag\">⚠️ OFF-NICHE (mainan/kostum) + growth -84%</div>\n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1729633110735029292\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1729633110735029292?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1732461949737928464":"<div class=\"mhead\"><h3>Kemeja Taktikal M-TAC Safety Baju Panjang Wearpack Pria Cotton Drill Panjang Atasan Terbaru Termurah</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>Kemeja</b> · Peringkat #3 Pakaian Khusus Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp106,93RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">10%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"neg\">-8%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp93,99JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>86</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>62%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>879</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.8</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>Kemeja taktikal M-TAC wearpack bahan cotton drill tebal, konversi kreator 62% tinggi. Angle: rugged/tactical outfit, cocok konten outdoor atau gaya militer.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1732461949737928464\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1732461949737928464?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1732550490948470301":"<div class=\"mhead\"><h3>MOC - Kemeja Batik Pria Lengan Pendek Mahayana - White</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>MOC</b> · Peringkat #4 Pakaian Khusus Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp271,76RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">8%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"pos\">398.5%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp79,90JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>25</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>40%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>294</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.9</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>EARLY MOVER: kreator baru 25 + growth +398%. Kemeja batik Mahayana modern minimalis warna putih buat anak muda. Angle: batik ga harus formal, bisa buat daily.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1732550490948470301\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1732550490948470301?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1730201557376205868":"<div class=\"mhead\"><h3>【Duffy toys】（Bisa Berkedip）Topeng Spiderman Mask / Topeng Mask Spiderman Headgear Superhero Chin Control Cosplay / Spiderman No Way Home Party Hats &amp; Masks / Hadiah Anak-anak Dewasa  / Topeng Spiderman Anak / Topeng Spiderman Dewasa/Topeng Spiderman Merah</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>（Bisa</b> · Peringkat #5 Pakaian Khusus Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp273,83RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">8%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"neg\">-83.5%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp78,59JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>72</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>31%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>287</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.7</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>Topeng Spiderman mask. FLAG: mainan/kostum, OFF-NICHE buat fashion pria + growth -83%. Include sesuai aturan, bukan prioritas.</p></div>\n      <div class=\"mflag\">⚠️ OFF-NICHE (mainan/kostum) + growth -83%</div>\n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1730201557376205868\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1730201557376205868?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1729642417705356114":"<div class=\"mhead\"><h3>MALE ( ISI 6 AROMA ) PARFUM EXCLUSIVE MALE/MEN SERIES 30 ML Perfume Wangi Pria Cowok Mewah Wangi</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>MALE</b> · Peringkat #1 Parfum Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp89,52RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">8%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"neg\">-25.8%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp656,74JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>133</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>5%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>7336</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.7</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>TERLARIS parfum se-report (7.336 pcs). Isi 6 aroma 30ml harga ~90rb = murah banget, cocok gift. Angle: 1 paket 6 aroma buat tiap mood seminggu. Catatan: konversi 5% (kreatornya udah banyak).</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1729642417705356114\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1729642417705356114?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1729588505159697608":"<div class=\"mhead\"><h3>Scentplus Day  - S Effect Wild Extrait de Parfum | Parfum Premium Tahan Lama- Fresh, Sweet</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>Scentplus</b> · Peringkat #2 Parfum Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp129,29RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">9%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"neg\">-78%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp272,80JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>146</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>25%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>2110</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.9</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>Parfum premium Extrait de Parfum (konsentrasi tinggi = tahan lama), rating 4.9. Angle: review longevity &amp; projection, test di kemeja.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1729588505159697608\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1729588505159697608?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1733229741140051563":"<div class=\"mhead\"><h3>3 Botol parfum pria mark him BPOM luxury, sporty dan romantic cocok untuk indoor outdoor dan acara penting, perfume EDP pria mewah elegan High Value pria mapan</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>—</b> · Peringkat #3 Parfum Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp86,29RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">8%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"neg\">-85.8%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp262,85JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>190</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>36%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>3046</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.7</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>3 botol parfum BPOM (aman) dengan 3 karakter: luxury, sporty, romantic. Angle: match aroma sama mood/occasion harian.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1733229741140051563\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1733229741140051563?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1729598159908537784":"<div class=\"mhead\"><h3>Heaven Scent SBY - God of Heaven 50ml Parfum  Pria</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>Heaven</b> · Peringkat #4 Parfum Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp157,53RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">10%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"neg\">-1.3%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp236,77JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>114</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>57%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>1503</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.9</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>Momentum PALING STABIL di kategori parfum (growth -1,3%) + konversi kreator 57% tinggi = gampang closing. Angle: signature scent cowok sehari-hari.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1729598159908537784\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1729598159908537784?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1734423718810846344":"<div class=\"mhead\"><h3>[NEW] HEURA 8PM - Extrait de Parfum - Aroma Nanas Fruity Fresh Segar Manis Maskulin Parfum Pria Tahan Lama</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>HEURA</b> · Peringkat #5 Parfum Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp147,11RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">10%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"neg\">-100%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp173,30JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>154</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>29%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>1178</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.9</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>Aroma UNIK nanas fruity fresh, beda dari parfum cowok biasa, rating 4.9. Angle: parfum 'beda dari yang lain', hook penciuman pertama.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1734423718810846344\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1734423718810846344?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1729383339304126388":"<div class=\"mhead\"><h3>【003 Harga telah diganti, cepat beli】BIDEN Jam Tangan Olahraga Kuarsa Otomatis Date Tali Stainless Steel Kasual Pria Anti Air Watches Original YN0012</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>BIDEN</b> · Peringkat #1 Jam Tangan Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp182,99RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">13%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"neg\">-63.9%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp473,41JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>93</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>23%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>2587</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.8</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>Komisi 13% (tertinggi se-kategori jam), desain sporty kuarsa. Angle: jam murah tapi tampilan mahal, review tahan air &amp; build quality.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1729383339304126388\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1729383339304126388?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1731892609744077949":"<div class=\"mhead\"><h3>【003 Harga telah diganti, cepat beli】Sunlifex Jam Tangan Pria Naga Emas Stainless Steel Quartz Original Dragon Gold Kuning Jam Tangan Cowok SL9002</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>Sunlifex</b> · Peringkat #2 Jam Tangan Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp81,57RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">10%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"pos\">50.3%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp312,15JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>91</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>49%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>3827</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.8</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>EARLY MOVER: growth +50%, desain naga emas eye-catching, harga cuma 81rb, udah 3.827 terjual. Angle: 'jam 80rb-an tapi kelihatan branded', close-up detail.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1731892609744077949\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1731892609744077949?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1731767243265705802":"<div class=\"mhead\"><h3>Aiyishi Jam Tangan Pria Dial BeronggaKuarsa Anti Air Tali Stainless Steel Jam TanganCowok Watches Original AY1806</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>Aiyishi</b> · Peringkat #3 Jam Tangan Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp80,40RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">8%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"pos\">28%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp157,74JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>163</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>21%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>1962</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.7</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>Desain skeleton dial berongga, anti air, tali stainless, growth NAIK +28%. Angle: close-up detail mekanik jam, cocok konten ASMR unboxing.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1731767243265705802\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1731767243265705802?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1730805193097053659":"<div class=\"mhead\"><h3>(002 Harga Telah Diganti, Cepat Beli) Jam Tangan Pria Mewah POSHI Skeleton Dial Tahan Air Fungsi Kalender &amp; Bisnis Bahan Stainless Steel - Watches</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>Jam</b> · Peringkat #4 Jam Tangan Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp147,25RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">8%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"neg\">-25.2%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp148,14JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>137</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>28%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>1006</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.7</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>Jam skeleton mewah POSHI tampilan premium, harga 147rb. Angle: unboxing 'sultan look' harga terjangkau.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1730805193097053659\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1730805193097053659?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1737234102378464692":"<div class=\"mhead\"><h3>PhiLipe Ricci Jam Tangan Pria Rantai Simple Kasual Kekinian Adjustable 100% Original 3838 Men Watch</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>PhiLipe</b> · Peringkat #5 Jam Tangan Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp112,77RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">10%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"neg\">-46.6%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp129,24JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>199</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>33%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>1146</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.8</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>Desain rantai simple kekinian, adjustable, cocok daily. Angle: daily watch minimalis buat gaya kasual.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1737234102378464692\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1737234102378464692?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1733047160950130597":"<div class=\"mhead\"><h3>SOLLOSA HYDRA GEL ORIGINAL FOR MAN BISA COD</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>SOLLOSA</b> · Peringkat #1 Perawatan Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp126,85RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">20%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"pos\">&gt;999.9%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp947,48JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>42</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>100%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>7469</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.6</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>TOP PICK: komisi 20% + lagi MELEDAK (growth &gt;999%) + konversi kreator 100% + 7.469 terjual. Angle: before-after glow-up cowok, demo pemakaian.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1733047160950130597\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1733047160950130597?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1737390032481060213":"<div class=\"mhead\"><h3>SODOXIN FOR MEN KEMASAN ROLL ON 10ML PRAKTIS EFECTIFE (BACA DESKRIPSI)</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>SODOXIN</b> · Peringkat #2 Perawatan Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp111,83RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">20%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"pos\">&gt;999.9%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp771,75JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>9</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>100%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>6901</b></div>\n        <div class=\"mm\"><span>Rating</span><b>5</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>EARLY MOVER TERKUAT: kreator CUMA 9 orang, komisi 20%, rating 5, growth &gt;999%. Roll-on 10ml praktis. Angle: 'produk yang belum banyak direview' = first mover advantage.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1737390032481060213\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1737390032481060213?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1735212027981235823":"<div class=\"mhead\"><h3>Garnier Men Facial Foam 100ml (x5) - Pack of 5 Facial Cleanser</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>Garnier</b> · Peringkat #3 Perawatan Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp135,97RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">8%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"neg\">-66.5%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp618,55JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>83</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>58%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>4549</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.9</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>Brand besar GARNIER MEN (trust tinggi), pack isi 5 = value, konversi kreator 58%. Angle: skincare basic cowok affordable, rutinitas cuci muka.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1735212027981235823\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1735212027981235823?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1736330422769124793":"<div class=\"mhead\"><h3>【KOL】Shuluoda Skin Freshness Spray perawatan pria 30ml Formula Botanikal Alami Lembut merawat Kulit</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>Shuluoda</b> · Peringkat #4 Perawatan Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp66,54RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">8%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"pos\">38.2%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp501,35JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>67</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>100%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>7534</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.5</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>TERLARIS perawatan (7.534 pcs), spray botanik, momentum NAIK +38%, konversi 100%. Angle: freshness spray on-the-go, demo sebelum/sesudah aktivitas.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1736330422769124793\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1736330422769124793?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>","1729385431554361058":"<div class=\"mhead\"><h3>Paket POWERFULL WHITENING Body Lotion + POWERFULL WHITENING Body Booster Osyin Glow</h3></div>\n      <div class=\"mbrand\">Brand/Seller: <b>Paket</b> · Peringkat #5 Perawatan Pria</div>\n      <div class=\"mgrid\">\n        <div class=\"mm\"><span>Harga Satuan (avg)</span><b>Rp187,19RB</b></div>\n        <div class=\"mm\"><span>Komisi</span><b class=\"acc\">10%</b></div>\n        <div class=\"mm\"><span>Growth 30hr</span><b class=\"neg\">-61.2%</b></div>\n        <div class=\"mm\"><span>Revenue 30hr</span><b>Rp497,93JT</b></div>\n        <div class=\"mm\"><span>Jumlah Kreator</span><b>107</b></div>\n        <div class=\"mm\"><span>Konversi Kreator</span><b>64%</b></div>\n        <div class=\"mm\"><span>Terjual 30hr</span><b>2660</b></div>\n        <div class=\"mm\"><span>Rating</span><b>4.7</b></div>\n      </div>\n      <div class=\"musp\"><div class=\"musp-t\">💡 USP / Nilai Jual</div><p>Paket Powerfull Whitening body lotion + booster, value bundling, konversi 64%. Angle: perawatan badan cowok biar glow, rutinitas after mandi.</p></div>\n      \n      <div class=\"mlinks\">\n        <a class=\"btn btn1\" href=\"https://www.kalodata.com/product/detail?id=1729385431554361058\" target=\"_blank\" rel=\"noopener\">📊 Buka di Kalodata</a>\n        <a class=\"btn btn2\" href=\"https://shop.tiktok.com/view/product/1729385431554361058?region=ID&locale=id-ID&source=agency\" target=\"_blank\" rel=\"noopener\">🛒 TikTok Shop</a>\n      </div>"};
+function showTab(k,el){document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));document.getElementById('panel-'+k).classList.add('active');document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');}
+function openModal(id){document.getElementById('modalBody').innerHTML='<div style="display:flex;justify-content:flex-end;margin-bottom:-26px"><button class=mclose onclick=closeModal()>&times;</button></div>'+MD[id];document.getElementById('overlay').classList.add('open');}
+function closeModal(){document.getElementById('overlay').classList.remove('open');}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal();});
 </script>
 </body></html>
