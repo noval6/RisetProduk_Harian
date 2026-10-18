@@ -3,576 +3,161 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Riset Produk Harian &middot; lebihcakep</title>
+<title>Riset Produk Harian · lebihcakep.bymarco</title>
 <style>
-:root{--bg:#0b0b0f;--card:#15151c;--accent:#ff7a1a;--line:#26262f;--txt:#e8e8ee;--mut:#9a9aa8;--pos:#38d37f;--neg:#ff5c6c;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;padding:0 16px 60px;}
-.wrap{max-width:1100px;margin:0 auto;}
-header{padding:28px 0 18px;border-bottom:1px solid var(--line);}
-.htag{color:var(--accent);font-weight:700;letter-spacing:.5px;font-size:13px;text-transform:uppercase;}
-h1{font-size:26px;margin:6px 0 4px;}
-.dateline{color:var(--mut);font-size:14px;}
-.stats{display:flex;flex-wrap:wrap;gap:12px;margin:20px 0 6px;}
-.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;flex:1;min-width:140px;}
-.stat .n{font-size:28px;font-weight:700;color:var(--accent);}
-.stat .l{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.4px;margin-top:2px;}
-.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:22px 0 18px;}
-.tab{background:var(--card);border:1px solid var(--line);color:var(--mut);padding:9px 16px;border-radius:999px;font-size:14px;cursor:pointer;transition:.15s;font-weight:600;}
-.tab:hover{color:var(--txt);border-color:var(--accent);}
-.tab.active{background:var(--accent);color:#1a1200;border-color:var(--accent);}
-.grid{display:none;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;}
-.grid.active{display:grid;}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;transition:.15s;}
-.card:hover{border-color:var(--accent);transform:translateY(-2px);}
-.card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;}
-.rank{background:var(--accent);color:#1a1200;font-weight:800;font-size:13px;padding:2px 9px;border-radius:7px;}
-.brand{color:var(--accent);font-weight:700;font-size:14px;text-align:right;}
-.fire{margin-left:4px;}
-.title{font-size:14px;color:var(--txt);margin-bottom:12px;min-height:40px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;}
-.metrics{display:grid;grid-template-columns:1fr 1fr;gap:7px 12px;}
-.m{display:flex;flex-direction:column;}
-.ml{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.3px;}
-.mv{font-size:14px;font-weight:600;}
-.mv.rev{color:var(--accent);}
-.mv.comm{color:#ffd37a;}
-.pos{color:var(--pos)!important;}
-.neg{color:var(--neg)!important;}
-.flag{margin-top:10px;font-size:12px;color:#ffc46b;background:rgba(255,122,26,.08);border:1px solid rgba(255,122,26,.25);border-radius:8px;padding:7px 9px;}
-#overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:center;justify-content:center;padding:18px;z-index:99;}
-#overlay.show{display:flex;}
-.modal{background:var(--card);border:1px solid var(--line);border-radius:16px;max-width:560px;width:100%;max-height:88vh;overflow-y:auto;padding:22px;}
-.mhead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;}
-.mbrand{color:var(--accent);font-weight:800;font-size:17px;}
-.mclose{background:none;border:none;color:var(--mut);font-size:28px;line-height:1;cursor:pointer;}
-.mtitle{font-size:15px;margin:8px 0 16px;color:var(--txt);}
-.mgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px;}
-.mm{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:9px 11px;display:flex;flex-direction:column;}
-.mm span{font-size:10px;color:var(--mut);text-transform:uppercase;letter-spacing:.3px;}
-.mm b{font-size:16px;margin-top:2px;}
-.mm b.rev{color:var(--accent);}
-.mm b.comm{color:#ffd37a;}
-.uspbox{background:rgba(255,122,26,.07);border:1px solid rgba(255,122,26,.22);border-radius:12px;padding:13px 15px;margin-bottom:12px;}
-.usplabel{color:var(--accent);font-weight:700;font-size:13px;margin-bottom:5px;}
-.uspbox p{font-size:14px;color:var(--txt);}
-.flagbox{font-size:13px;color:#ffc46b;background:rgba(255,196,107,.08);border:1px solid rgba(255,196,107,.25);border-radius:10px;padding:10px 12px;margin-bottom:14px;}
-.links{display:flex;gap:10px;flex-wrap:wrap;}
-.btn{flex:1;min-width:150px;text-align:center;padding:12px;border-radius:10px;font-weight:700;font-size:14px;text-decoration:none;transition:.15s;}
-.btnk{background:#1f2937;color:#dbeafe;border:1px solid #334155;}
-.btnk:hover{background:#2b3a4f;}
-.btnt{background:var(--accent);color:#1a1200;}
-.btnt:hover{filter:brightness(1.08);}
-footer{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);text-align:center;color:var(--mut);font-size:13px;}
-@media(max-width:560px){.stats{gap:8px;}.stat{min-width:calc(50% - 4px);}h1{font-size:22px;}}
+:root{--bg:#0b0b0f;--card:#15151c;--card2:#1c1c26;--accent:#ff7a1a;--txt:#f2f2f5;--mut:#8b8b99;--line:#26262f;--green:#2ecc71;--red:#ff5b5b;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--txt);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:20px 16px 60px}
+header{padding:8px 0 18px;border-bottom:1px solid var(--line);margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.logo{font-weight:800;font-size:20px;letter-spacing:-.5px}
+.logo span{color:var(--accent)}
+.dateline{color:var(--mut);font-size:13px;margin-top:4px}
+.sub{color:var(--mut);font-size:13.5px;margin-top:10px;max-width:760px}
+.stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 14px;min-width:92px}
+.stat b{display:block;font-size:20px;color:var(--accent)}
+.stat small{color:var(--mut);font-size:11.5px;text-transform:uppercase;letter-spacing:.4px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:22px 0 18px;position:sticky;top:0;background:var(--bg);padding:8px 0;z-index:20}
+.tab{background:var(--card);border:1px solid var(--line);color:var(--mut);padding:8px 14px;border-radius:999px;cursor:pointer;font-size:13.5px;font-weight:600;transition:.15s;white-space:nowrap}
+.tab:hover{color:var(--txt)}
+.tab.active{background:var(--accent);color:#120a02;border-color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:14px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;cursor:pointer;transition:.15s;position:relative;overflow:hidden}
+.card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.rank{position:absolute;top:0;right:0;background:var(--card2);color:var(--mut);font-size:11px;font-weight:700;padding:4px 10px;border-bottom-left-radius:10px}
+.badges{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;min-height:22px}
+.badge{font-size:11px;font-weight:700;padding:3px 8px;border-radius:999px}
+.b-inv{background:rgba(255,122,26,.14);color:var(--accent);border:1px solid rgba(255,122,26,.4)}
+.b-early{background:rgba(46,204,113,.12);color:#4fe08a;border:1px solid rgba(46,204,113,.35)}
+.b-best{background:rgba(120,160,255,.12);color:#8fb0ff;border:1px solid rgba(120,160,255,.35)}
+.b-warn{background:rgba(255,186,73,.1);color:#ffba49;border:1px solid rgba(255,186,73,.3)}
+.ptitle{font-size:14px;font-weight:600;margin-bottom:12px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:40px;padding-right:34px}
+.metrics{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.m{background:var(--card2);border-radius:8px;padding:7px 9px}
+.m small{display:block;color:var(--mut);font-size:10.5px;text-transform:uppercase;letter-spacing:.3px}
+.m b{font-size:14px}
+.pos{color:var(--green)}.neg{color:#ff6b6b}
+.foot-tap{margin-top:12px;font-size:11.5px;color:var(--mut);text-align:center}
+/* modal */
+.ov{position:fixed;inset:0;background:rgba(0,0,0,.72);display:none;align-items:flex-start;justify-content:center;padding:40px 16px;z-index:50;overflow-y:auto}
+.ov.show{display:flex}
+.modal{background:var(--card);border:1px solid var(--line);border-radius:16px;max-width:620px;width:100%;padding:24px}
+.modal h2{font-size:17px;line-height:1.35;padding-right:30px}
+.mhead{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:6px}
+.close{background:var(--card2);border:1px solid var(--line);color:var(--txt);width:30px;height:30px;border-radius:8px;cursor:pointer;font-size:16px;flex-shrink:0}
+.mseller{color:var(--mut);font-size:13px;margin-bottom:16px}
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.mg{background:var(--card2);border-radius:10px;padding:10px}
+.mg small{display:block;color:var(--mut);font-size:10.5px;text-transform:uppercase;letter-spacing:.3px;margin-bottom:3px}
+.mg b{font-size:15px}
+.usp{background:rgba(255,122,26,.07);border:1px solid rgba(255,122,26,.25);border-radius:10px;padding:13px 15px;margin-bottom:12px}
+.usp .lbl{color:var(--accent);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
+.usp p{font-size:13.5px}
+.flag{font-size:12.5px;color:#ffba49;margin-bottom:16px;padding-left:4px}
+.links{display:flex;gap:10px;flex-wrap:wrap}
+.lnk{flex:1;min-width:150px;text-align:center;text-decoration:none;font-weight:700;font-size:13px;padding:11px;border-radius:10px}
+.lnk-kal{background:var(--card2);color:var(--txt);border:1px solid var(--line)}
+.lnk-tt{background:var(--accent);color:#120a02}
+footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--line);color:var(--mut);font-size:12.5px;text-align:center}
+@media(max-width:560px){.mgrid{grid-template-columns:repeat(2,1fr)}.grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
 <div class="wrap">
 <header>
-<div class="htag">&#9889; Automated Research Report</div>
-<h1>Riset Produk Harian &middot; lebihcakep</h1>
-<div class="dateline">Laporan Rabu, 14 Oktober 2026 &middot; Data 13 Sep - 13 Okt 2026 &middot; Filter: harga Rp20-400rb, komisi &ge;8%, kreator &le;200, rank by revenue</div>
+  <div class="brand"><div class="logo">lebih<span>cakep</span>.bymarco</div></div>
+  <div class="dateline" id="dateline"></div>
+  <div class="sub">Riset produk harian TikTok Shop via Kalodata (akun berbayar). Filter: harga Rp20rb–400rb · komisi ≥8% · jumlah kreator ≤200 · rank revenue 30hr. Target: produk laris tapi kreator masih sedikit = <b style="color:var(--accent)">low competition / early mover</b>.</div>
+  <div class="stats">
+    <div class="stat"><b id="s-total">25</b><small>Produk</small></div>
+    <div class="stat"><b>5</b><small>Kategori</small></div>
+    <div class="stat"><b id="s-inv">4</b><small>Match Inventory 🔥</small></div>
+    <div class="stat"><b id="s-early">4</b><small>Early Mover 🚀</small></div>
+  </div>
 </header>
-<div class="stats">
-<div class="stat"><div class="n">25</div><div class="l">Total Produk</div></div>
-<div class="stat"><div class="n">5</div><div class="l">Kategori</div></div>
-<div class="stat"><div class="n">3</div><div class="l">&#128293; Match Inventory</div></div>
-<div class="stat"><div class="n">17</div><div class="l">Growth Positif</div></div>
+<div class="tabs" id="tabs"></div>
+<div class="grid" id="grid"></div>
+<footer>Automated Research Report · Powered by Kalodata + Inventory Cross-Check</footer>
 </div>
-<div class="tabs"><button class="tab active" data-cat="0" onclick="showCat(0)">Atasan</button><button class="tab" data-cat="1" onclick="showCat(1)">Jaket &amp; Mantel</button><button class="tab" data-cat="2" onclick="showCat(2)">Pakaian Dalam</button><button class="tab" data-cat="3" onclick="showCat(3)">Perawatan</button><button class="tab" data-cat="4" onclick="showCat(4)">Kacamata</button></div>
-<div class="grid cat-pane active" data-cat="0">
-      <div class="card" onclick="openModal(0)">
-        <div class="card-top">
-          <span class="rank">#1</span>
-          <span class="brand">Distro Bundling</span>
-        </div>
-        <div class="title">Buy 1 get (4 kaos 1 tumbler) distro motif terbaru semi katun 24s unisex</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp2,27M</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp342,12RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">10%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv pos">+17.4%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">41%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">22</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">6.638</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.7</span></div>
-        </div>
-        
-      </div>
-      <div class="card" onclick="openModal(1)">
-        <div class="card-top">
-          <span class="rank">#2</span>
-          <span class="brand">Detroit</span>
-        </div>
-        <div class="title">Detroit Work Jacket boxy crop, Jacket Pria bahan Kanvas</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp840,81JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp359,78RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">15%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv pos">+1.5%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">25%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">158</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">2.337</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.8</span></div>
-        </div>
-        <div class="flag">&#9888; Muncul dobel di tab Jaket (lintas kategori di Kalodata).</div>
-      </div>
-      <div class="card" onclick="openModal(2)">
-        <div class="card-top">
-          <span class="rank">#3</span>
-          <span class="brand">BRINGHTWEAR</span>
-        </div>
-        <div class="title">BRINGHTWEAR 2+1 Kaos Original (Extra 1 Tas &amp; 1 Tumbler) Hitam Full Print</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp750,96JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp341,04RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">10%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv pos">+191.2%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">60%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">10</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">2.202</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.7</span></div>
-        </div>
-        
-      </div>
-      <div class="card" onclick="openModal(3)">
-        <div class="card-top">
-          <span class="rank">#4</span>
-          <span class="brand">DREAMSTORY<span class="fire" title="Ada di inventory">&#128293;</span></span>
-        </div>
-        <div class="title">[PROMO 10.10] Beli 1 Dapat 2 - Beli Celana Dapat T-Shirt DREAMSTORY Cotton Combed 24s</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp742,73JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp166,72RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">8%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv neg">-31%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">59%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">99</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">4.455</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.8</span></div>
-        </div>
-        <div class="flag">&#9888; Prioritas shooting: stok brand udah ada, tinggal eksekusi.</div>
-      </div>
-      <div class="card" onclick="openModal(4)">
-        <div class="card-top">
-          <span class="rank">#5</span>
-          <span class="brand">SEVENFLY</span>
-        </div>
-        <div class="title">SEVENFLY Jaket Parasut Pria Wanita Windbreaker Waterproof Anti Air Original Premium</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp680,55JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp131,99RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">10%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv pos">+425.3%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">47%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">178</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">5.156</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.7</span></div>
-        </div>
-        <div class="flag">&#9888; Muncul dobel di tab Jaket (lintas kategori).</div>
-      </div></div><div class="grid cat-pane" data-cat="1">
-      <div class="card" onclick="openModal(5)">
-        <div class="card-top">
-          <span class="rank">#1</span>
-          <span class="brand">Detroit</span>
-        </div>
-        <div class="title">Detroit Work Jacket boxy crop, Jacket Pria bahan Kanvas</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp840,81JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp359,78RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">15%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv pos">+1.5%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">25%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">158</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">2.337</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.8</span></div>
-        </div>
-        
-      </div>
-      <div class="card" onclick="openModal(6)">
-        <div class="card-top">
-          <span class="rank">#2</span>
-          <span class="brand">SEVENFLY</span>
-        </div>
-        <div class="title">SEVENFLY Jaket Parasut Pria Wanita Windbreaker Waterproof Anti Air Original Premium</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp680,55JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp131,99RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">10%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv pos">+425.3%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">47%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">178</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">5.156</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.7</span></div>
-        </div>
-        
-      </div>
-      <div class="card" onclick="openModal(7)">
-        <div class="card-top">
-          <span class="rank">#3</span>
-          <span class="brand">Screamous<span class="fire" title="Ada di inventory">&#128293;</span></span>
-        </div>
-        <div class="title">[BEST SELLER] Screamous WindBreaker Jacket HAMESH BLACK</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp417,64JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp235,42RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">9%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv pos">+61.9%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">5%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">159</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">1.774</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.8</span></div>
-        </div>
-        <div class="flag">&#9888; Konv kreator cuma 5% (terendah report) = susah closing, butuh hook kuat + CTA jelas.</div>
-      </div>
-      <div class="card" onclick="openModal(8)">
-        <div class="card-top">
-          <span class="rank">#4</span>
-          <span class="brand">Celana Studio<span class="fire" title="Ada di inventory">&#128293;</span></span>
-        </div>
-        <div class="title">CELANASTUDIO - Jaket Pria Resleting Boxy Cropped | Zipper Work Jacket</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp373,63JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp326,88RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">11%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv pos">+79.8%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">27%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">164</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">1.143</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.9</span></div>
-        </div>
-        <div class="flag">&#9888; Match terkuat run ini - brand &amp; jenis produk identik sama inventory.</div>
-      </div>
-      <div class="card" onclick="openModal(9)">
-        <div class="card-top">
-          <span class="rank">#5</span>
-          <span class="brand">Dobujack</span>
-        </div>
-        <div class="title">Dobujack Jacket Reversible Holly Black</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp345,46JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp228,18RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">10%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv pos">+21.1%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">12%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">170</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">1.514</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.8</span></div>
-        </div>
-        <div class="flag">&#9888; Konv 12% agak rendah.</div>
-      </div></div><div class="grid cat-pane" data-cat="2">
-      <div class="card" onclick="openModal(10)">
-        <div class="card-top">
-          <span class="rank">#1</span>
-          <span class="brand">Paket 6pcs</span>
-        </div>
-        <div class="title">PROMO (Paket Isi 6pcs) Celana Dalam Boxer Pria Premium Anti Bakteri Nyaman &amp; Elastis</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp702,67JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp140,00RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">10%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv neg">-3.6%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">65%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">150</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">5.019</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.9</span></div>
-        </div>
-        
-      </div>
-      <div class="card" onclick="openModal(11)">
-        <div class="card-top">
-          <span class="rank">#2</span>
-          <span class="brand">3 PCS Premium</span>
-        </div>
-        <div class="title">【3 PCS】Celana Dalam Pria Bernapas - Desain Premium, Ringan &amp; Bebas Gerah</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp387,49JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp150,13RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">8%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv pos">+522.2%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">40%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">156</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">2.581</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.9</span></div>
-        </div>
-        
-      </div>
-      <div class="card" onclick="openModal(12)">
-        <div class="card-top">
-          <span class="rank">#3</span>
-          <span class="brand">VAUDREE</span>
-        </div>
-        <div class="title">[PROMO] VAUDREE - Paket Hemat Isi 4 Pcs Boxer Pria Ice Silk Lembut Dingin Antibakteri</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp372,90JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp96,96RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">10%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv neg">-3%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">63%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">92</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">3.846</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.6</span></div>
-        </div>
-        
-      </div>
-      <div class="card" onclick="openModal(13)">
-        <div class="card-top">
-          <span class="rank">#4</span>
-          <span class="brand">VIMISU</span>
-        </div>
-        <div class="title">VIMISU Celana Dalam Pria Seamless Bahan Sutra Dingin Boxer Dewasa Sport</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp336,18JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp81,40RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">15%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv pos">+64.8%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">22%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">178</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">4.130</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.8</span></div>
-        </div>
-        <div class="flag">&#9888; Konv 22% agak rendah, butuh hook.</div>
-      </div>
-      <div class="card" onclick="openModal(14)">
-        <div class="card-top">
-          <span class="rank">#5</span>
-          <span class="brand">UOMO</span>
-        </div>
-        <div class="title">3/6pcs UOMO Pakaian Dalam Olahraga Boxer Fit Dewasa Pria Bahan Lembut</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp323,42JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp83,10RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">10%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv neg">-35.7%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">48%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">122</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">3.892</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.8</span></div>
-        </div>
-        <div class="flag">&#9888; Momentum lagi turun, masuk karena low-comp.</div>
-      </div></div><div class="grid cat-pane" data-cat="3">
-      <div class="card" onclick="openModal(15)">
-        <div class="card-top">
-          <span class="rank">#1</span>
-          <span class="brand">SOLLOSA</span>
-        </div>
-        <div class="title">SOLLOSA HYDRA GEL ORIGINAL FOR MAN BISA COD</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp1,28M</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp126,78RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">20%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv pos">+81.6%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">98%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">62</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">10.106</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.8</span></div>
-        </div>
-        
-      </div>
-      <div class="card" onclick="openModal(16)">
-        <div class="card-top">
-          <span class="rank">#2</span>
-          <span class="brand">SODOXIN</span>
-        </div>
-        <div class="title">SODOXIN FOR MEN Kemasan Roll On 10ml Praktis Efektif</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp771,75JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp111,83RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">20%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv neg">-86.7%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">100%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">9</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">6.901</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 5</span></div>
-        </div>
-        <div class="flag">&#9888; Momentum turun tajam, tapi kreator cuma 9 = ruang gede buat first mover.</div>
-      </div>
-      <div class="card" onclick="openModal(17)">
-        <div class="card-top">
-          <span class="rank">#3</span>
-          <span class="brand">Shuluoda</span>
-        </div>
-        <div class="title">【KOL】Shuluoda Skin Freshness Spray Perawatan Pria 30ml Formula Botanikal Alami</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp646,17JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp72,20RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">8%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv pos">+32.7%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">97%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">87</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">8.950</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.5</span></div>
-        </div>
-        
-      </div>
-      <div class="card" onclick="openModal(18)">
-        <div class="card-top">
-          <span class="rank">#4</span>
-          <span class="brand">Garnier</span>
-        </div>
-        <div class="title">Garnier Men Facial Foam 100ml (x5) - Pack of 5 Facial Cleanser</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp604,71JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp141,45RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">8%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv neg">-50.1%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">63%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">68</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">4.275</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.9</span></div>
-        </div>
-        <div class="flag">&#9888; Growth -50% tapi brand kuat = gampang closing karena trust.</div>
-      </div>
-      <div class="card" onclick="openModal(19)">
-        <div class="card-top">
-          <span class="rank">#5</span>
-          <span class="brand">OLE-ZOL</span>
-        </div>
-        <div class="title">OLE-ZOL Roll On Original Nyaman Digunakan Bisa Bayar Ditempat</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp459,58JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp111,66RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">20%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv pos">&gt;999.9%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">100%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">57</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">4.116</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 5</span></div>
-        </div>
-        <div class="flag">&#9888; Early mover momentum ekstrem - gas cepet selagi fresh.</div>
-      </div></div><div class="grid cat-pane" data-cat="4">
-      <div class="card" onclick="openModal(20)">
-        <div class="card-top">
-          <span class="rank">#1</span>
-          <span class="brand">Dalwa</span>
-        </div>
-        <div class="title">Kacamata Hitam Dalwa Fotokromik Visi Siang &amp; Malam, Polarized TR90 UV400</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp478,87JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp165,93RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">10%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv pos">+28%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">32%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">167</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">2.886</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.9</span></div>
-        </div>
-        
-      </div>
-      <div class="card" onclick="openModal(21)">
-        <div class="card-top">
-          <span class="rank">#2</span>
-          <span class="brand">UV400 Modis</span>
-        </div>
-        <div class="title">Kacamata Hitam UV400 Modis Berkendara Bepergian Di Luar Ruangan Wanita</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp389,59JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp41,62RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">10%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv pos">+55.8%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">50%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">105</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">9.361</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.8</span></div>
-        </div>
-        <div class="flag">&#9888; OFF-NICHE: judul 'Wanita' - cek relevansi audience outfit pria dulu sebelum push.</div>
-      </div>
-      <div class="card" onclick="openModal(22)">
-        <div class="card-top">
-          <span class="rank">#3</span>
-          <span class="brand">PD28812</span>
-        </div>
-        <div class="title">Kacamata Sunglasses Frame Kotak PD28812 Polarized Anti UV-400 Fullset</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp359,35JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp116,94RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">9%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv neg">-8.9%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">32%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">146</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">3.073</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.8</span></div>
-        </div>
-        
-      </div>
-      <div class="card" onclick="openModal(23)">
-        <div class="card-top">
-          <span class="rank">#4</span>
-          <span class="brand">GM-Plot</span>
-        </div>
-        <div class="title">【GM-Plot 2370 Kacamata (Buy 1 Get 5)】Eksklusif Premium Gift Box Polarized UV</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp333,67JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp105,52RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">9%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv pos">+32%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">45%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">38</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">3.162</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.9</span></div>
-        </div>
-        
-      </div>
-      <div class="card" onclick="openModal(24)">
-        <div class="card-top">
-          <span class="rank">#5</span>
-          <span class="brand">Dalwa</span>
-        </div>
-        <div class="title">【FLEKSIBEL】Dalwa Kacamata Driving Fotokromik Polarized Anti UV400 360°</div>
-        <div class="metrics">
-          <div class="m"><span class="ml">Revenue 30hr</span><span class="mv rev">Rp315,59JT</span></div>
-          <div class="m"><span class="ml">Harga</span><span class="mv">Rp199,74RB</span></div>
-          <div class="m"><span class="ml">Komisi</span><span class="mv comm">10%</span></div>
-          <div class="m"><span class="ml">Growth 30hr</span><span class="mv neg">-6%</span></div>
-          <div class="m"><span class="ml">Konv Kreator</span><span class="mv">34%</span></div>
-          <div class="m"><span class="ml">Kreator</span><span class="mv">131</span></div>
-          <div class="m"><span class="ml">Terjual</span><span class="mv">1.580</span></div>
-          <div class="m"><span class="ml">Rating</span><span class="mv">&#11088; 4.8</span></div>
-        </div>
-        
-      </div></div>
+
+<div class="ov" id="ov" onclick="if(event.target===this)closeM()">
+  <div class="modal" id="modal"></div>
 </div>
-<div id="overlay"><div class="modal" id="modalBody"></div></div>
-<footer>Automated Research Report &middot; Powered by Kalodata + Inventory Cross-Check</footer>
+
 <script>
+const DATA = {"Atasan":[{"t":"Buy 1 Get 4 Kaos + 1 Tumbler — Distro Motif Terbaru Semi Katun 24s Unisex","seller":"Distro Bundle (generic)","id":"1734367089693787275","rev":"Rp2,40M","g":"22.2%","up":"Rp346,34RB","c":"10%","cn":23,"cv":43,"sl":6919,"rt":4.7,"usp":"Bundle gila — beli 1 dapat 4 kaos + tumbler, masih di range harga. Angle: unboxing 'segini dapet 4 kaos + tumbler' / haul value-for-money. Kreator baru 23, konv 43% solid.","flag":""},{"t":"BRINGHTWEAR 2+1 Kaos Original (Extra 1 Tas + 1 Tumbler) Hitam Full Print M-XXXL","seller":"BRINGHTWEAR","id":"1737440306122294733","rev":"Rp1,71M","g":"211.4%","up":"Rp351,37RB","c":"10%","cn":15,"cv":47,"sl":4866,"rt":4.7,"early":true,"usp":"Early mover banget — kreator baru 15 tapi growth +211%. Launch Sep 2026, bundle 2 kaos + tas + tumbler full print. Ambil sebelum rame, blue ocean.","flag":""},{"t":"[GUNCANG 10.10] Beli 1 Dapat 2 T-Shirt DREAMSTORY Cotton Combed 24s High Quality","seller":"DREAMSTORY","id":"1736222428700706085","rev":"Rp1,57M","g":"-7.4%","up":"Rp166,96RB","c":"8%","cn":196,"cv":40,"sl":9420,"rt":4.8,"inv":true,"best":true,"usp":"🔥 Brand ada di inventory (DreamStory Kaos Olympic Combed + Hoodie Hydra) = zero-risk, bisa langsung shooting stok. Bundle beli 1 dapat 2 combed 24s, volume 9rb+.","flag":"Growth -7.4% (melandai) — tapi stok ready jadi tetap worth."},{"t":"BRINGHTWEAR 3 Kaos + 1 Kaos Putih — Distro VIP Full Print Hitam M-XXXL","seller":"BRINGHTWEAR","id":"1737437039609611725","rev":"Rp1,45M","g":">999.9%","up":"Rp324,65RB","c":"10%","cn":33,"cv":18,"sl":4451,"rt":4.8,"early":true,"usp":"Growth meledak >999%, kreator cuma 33. Paket 4 kaos full print. Angle sama kayak varian 2+1, main di variasi motif acak. Komisi 10%.","flag":"Konv kreator 18% agak rendah — hook visual full print harus kuat."},{"t":"[PROMO 10.10] Beli Celana Dapat T-Shirt DREAMSTORY Cotton Combed 24s","seller":"DREAMSTORY","id":"1733279951008990501","rev":"Rp814,73JT","g":"-45.2%","up":"Rp167,12RB","c":"8%","cn":96,"cv":60,"sl":4875,"rt":4.8,"inv":true,"usp":"🔥 DreamStory lagi (brand di inventory). Beli celana bonus t-shirt combed, konv 60% tinggi. Main brand yang udah ke-stok = aman.","flag":"Growth -45.2% = udah lewat puncak. Pakai angle brand-familiar, bukan produk fresh."}],"Jaket & Mantel":[{"t":"Detroit Work Jacket Boxy Crop — Jacket Pria Bahan Kanvas","seller":"Detroit","id":"1729740009264023066","rev":"Rp814,31JT","g":"6.9%","up":"Rp355,44RB","c":"15%","cn":143,"cv":28,"sl":2291,"rt":4.8,"usp":"Komisi 15% paling gede di kategori. Work jacket boxy crop bahan kanvas lagi tren banget. Angle: styling workwear / boxy fit buat OOTD cowok.","flag":"Produk ini sering nyebrang ke kategori Atasan juga — demand luas."},{"t":"[BEST SELLER] Screamous WindBreaker Jacket HAMESH Black","seller":"Screamous","id":"1734428369708942500","rev":"Rp438,02JT","g":"26.2%","up":"Rp238,57RB","c":"9%","cn":170,"cv":5,"sl":1836,"rt":4.8,"inv":true,"warn":true,"usp":"🔥 Screamous ada di inventory (Miro Cardigan). Brand lokal kuat, windbreaker best seller. Growth +26%.","flag":"Konv kreator 5% = TERENDAH. Butuh hook kuat / angle beda biar convert, jangan review datar."},{"t":"CELANASTUDIO — Jaket Pria Resleting Boxy Cropped | Zipper Work Jacket","seller":"CELANASTUDIO","id":"1732646734038795323","rev":"Rp369,52JT","g":"38.5%","up":"Rp324,71RB","c":"11%","cn":166,"cv":25,"sl":1138,"rt":4.9,"inv":true,"usp":"🔥 MATCH TERKUAT — inventory punya tipe IDENTIK (Celana Studio 'Jaket Pria Boxy Cropped Zipper' + 'Jacket Boxy Cropped'). Stok ready, tinggal shooting. Growth +38,5% rating 4.9. PRIORITAS SHOOTING.","flag":""},{"t":"Dobujack Jacket Reversible Holly Black","seller":"Dobujack","id":"1729674796143904649","rev":"Rp333,71JT","g":"22.7%","up":"Rp216,00RB","c":"10%","cn":178,"cv":12,"sl":1545,"rt":4.8,"usp":"Jaket reversible (bolak-balik 2 look). Angle konten '1 jaket 2 gaya' gampang viral — demo balik-balikin di satu video.","flag":"Konv 12% agak rendah — fokus ke gimmick reversible-nya."},{"t":"Jaket Outdoor Aquatex — Tahan Air & Angin Unisex Sport","seller":"Aquatex (generic)","id":"1732781156159489900","rev":"Rp294,49JT","g":"11.8%","up":"Rp131,00RB","c":"10%","cn":194,"cv":18,"sl":2248,"rt":4.8,"usp":"Jaket tahan air & angin cuma Rp131rb = value. Angle FYP: test siram air langsung di kamera, airnya ngalir = proof tahan air. Volume 2rb+.","flag":""}],"Perawatan":[{"t":"SOLLOSA Hydra Gel Original For Man (Bisa COD)","seller":"SOLLOSA","id":"1733047160950130597","rev":"Rp1,46M","g":"4.2%","up":"Rp126,42RB","c":"20%","cn":75,"cv":99,"sl":11564,"rt":4.8,"best":true,"usp":"Jagoan perawatan pria — komisi 20% + terjual 11rb+. Hydra gel for man, konv kreator 99% hampir sempurna. Angle: masalah kulit kusam/berminyak cowok, before-after.","flag":""},{"t":"SOLLOSA Hydra Gel 100% Original For Man (Bisa COD)","seller":"SOLLOSA","id":"1737740263866205280","rev":"Rp1,03M","g":">999.9%","up":"Rp107,90RB","c":"20%","cn":9,"cv":100,"sl":9584,"rt":5,"early":true,"best":true,"usp":"Varian baru SOLLOSA — growth meledak >999% tapi kreator CUMA 9 = early mover + komisi 20%. Konv 100% rating 5. Masuk sekarang sebelum penuh kreator.","flag":""},{"t":"Sodoxin Antiseptik Aman Dipakai Setiap Hari (Kemasan Roll On)","seller":"Sodoxin","id":"1737778600501282294","rev":"Rp837,47JT","g":">999.9%","up":"Rp126,99RB","c":"20%","cn":7,"cv":100,"sl":6595,"rt":5,"early":true,"usp":"Baru launch 10 Okt, kreator baru 7 = PALING early. Roll-on antiseptik komisi 20% konv 100%. Angle: solusi praktis bau badan / keringat cowok, demo pemakaian roll-on.","flag":""},{"t":"SODOXIN For Men Roll On 10ML Praktis (Baca Deskripsi)","seller":"SODOXIN","id":"1737390032481060213","rev":"Rp771,75JT","g":"-100%","up":"Rp111,83RB","c":"20%","cn":9,"cv":100,"sl":6901,"rt":5,"warn":true,"usp":"Sodoxin roll-on varian lain, komisi 20% konv 100%, terjual 6900. Konsisten laku.","flag":"Growth -100% = kemungkinan produk relisted / stok habis. Cek ketersediaan link dulu sebelum bikin konten."},{"t":"[KOL] Shuluoda Skin Freshness Spray Perawatan Pria 30ml Botanikal","seller":"Shuluoda","id":"1736330422769124793","rev":"Rp688,61JT","g":"43.5%","up":"Rp70,98RB","c":"8%","cn":88,"cv":98,"sl":9702,"rt":4.5,"best":true,"usp":"Spray perawatan formula botanikal, terjual 9700, harga murah Rp71rb. Growth +43%. Angle: freshness spray praktis dibawa ke mana-mana, semprot sebelum ngedate.","flag":""}],"Parfum":[{"t":"MALE (Isi 6 Aroma) Parfum Exclusive Men Series 30ml — Wangi Pria Mewah","seller":"MALE Series","id":"1729642417705356114","rev":"Rp560,79JT","g":"4.4%","up":"Rp76,65RB","c":"8%","cn":126,"cv":7,"sl":7316,"rt":4.7,"warn":true,"usp":"Isi 6 parfum 30ml cuma Rp77rb = value bundle. Angle: 'testing 6 wangi 1 paket', rate aroma satu-satu. Volume 7rb+.","flag":"Konv kreator 7% rendah — jangan review datar, pakai gimmick 'tebak wangi' biar engaging."},{"t":"Barsten Vermont — Eau De Parfum 40ml, Wangi Fresh Dingin Unisex Tahan Lama","seller":"Barsten","id":"1734894213411145051","rev":"Rp244,89JT","g":"65.4%","up":"Rp114,11RB","c":"10%","cn":193,"cv":31,"sl":2146,"rt":4.8,"usp":"Parfum fresh/dingin unisex tahan lama, growth +65% lagi naik. Notes zesty-fizzy-icy. Angle: buat cowok yang suka wangi segar anti-'bau manis'.","flag":""},{"t":"Heaven Scent SBY — God of Heaven 50ml Parfum Pria","seller":"Heaven Scent SBY","id":"1729598159908537784","rev":"Rp223,84JT","g":"29.1%","up":"Rp142,12RB","c":"10%","cn":97,"cv":62,"sl":1575,"rt":4.9,"usp":"Konv kreator 62% = PALING tinggi di kategori, emang laku pas di-review. Rating 4.9, parfum pria 50ml. Angle: signature scent daily, storytelling 'wangi yang bikin nempel'.","flag":""},{"t":"Parfum Men Series — Maskulin Fresh Manly, Pilih Aroma Sesuai Karakter","seller":"Men Series","id":"1735174569726084144","rev":"Rp172,20JT","g":"54.4%","up":"Rp74,00RB","c":"11%","cn":107,"cv":59,"sl":2327,"rt":4.9,"usp":"Pilih aroma sesuai karakter, harga Rp74rb, growth +54% konv 59%. Angle: kuis 'wangi sesuai kepribadian lo' — interaktif, ngajak komen.","flag":""},{"t":"THRVL Oil Original BPOM — Minyak Relaxing Garansi Terjamin","seller":"THRVL","id":"1737253274115737346","rev":"Rp168,11JT","g":"-100%","up":"Rp152,55RB","c":"20%","cn":2,"cv":50,"sl":1102,"rt":5,"warn":true,"usp":"Komisi 20% kreator cuma 2 (super early) rating 5. Secara angka menarik.","flag":"Off-niche: ini minyak relaksasi/wellness, bukan parfum grooming. Growth -100% juga. Pertimbangkan dulu apakah nyambung sama akun fashion."}],"Kacamata":[{"t":"Kacamata Hitam Dalwa Fotokromik — Polarized TR90 UV400, Siang & Malam","seller":"Dalwa","id":"1734305536254510678","rev":"Rp469,00JT","g":"60.9%","up":"Rp162,06RB","c":"10%","cn":167,"cv":29,"sl":2894,"rt":4.9,"usp":"Lensa fotokromik (berubah warna siang/malam) + polarized TR90. Growth +61%. Angle FYP WAJIB: demo lensa berubah warna kena matahari — super eye-catching, auto stop-scroll.","flag":""},{"t":"Kacamata Hitam UV400 Modis Berkendara — Bepergian Luar Ruangan","seller":"Generic Store","id":"1735477508728915700","rev":"Rp438,53JT","g":"25.9%","up":"Rp42,63RB","c":"10%","cn":123,"cv":46,"sl":10286,"rt":4.8,"best":true,"warn":true,"usp":"Harga Rp42rb tapi terjual 10rb+ = volume gila, margin aman buat affiliate. Angle: 'kacamata murah tapi ga murahan' / daily driving.","flag":"Judul ada kata 'Wanita' di versi aslinya — pastikan model unisex dulu sebelum konten di akun cowok."},{"t":"[GM-Plot 2370] Buy 1 Get 5 + Gift Box Premium — Titanium UV Polarized","seller":"GM-Plot","id":"1729993614200572197","rev":"Rp370,35JT","g":"10.5%","up":"Rp103,02RB","c":"9%","cn":32,"cv":41,"sl":3595,"rt":4.9,"usp":"Beli 1 dapat 5 + gift box premium, titanium polarized. Kreator cuma 32 = early. Angle: unboxing value 'bayar 1 dapet 5' + premium gift box = konten haul yang puas ditonton.","flag":""},{"t":"Kacamata Sunglasses Frame Kotak PD28812 Polarized Anti UV-400 Fullset","seller":"Generic","id":"1732153348567172686","rev":"Rp326,33JT","g":"20.5%","up":"Rp107,49RB","c":"9%","cn":145,"cv":32,"sl":3036,"rt":4.8,"usp":"Frame kotak polarized anti UV400 fullset. Angle: styling frame kotak buat bentuk muka — tren retro/old money, cocok konten 'pilih frame sesuai muka'.","flag":""},{"t":"[COD & Paket Kotak] Kacamata Hitam Bingkai Bulat Gaya UV400","seller":"Generic","id":"1734502630243731090","rev":"Rp316,52JT","g":"47.9%","up":"Rp40,65RB","c":"10%","cn":197,"cv":45,"sl":7786,"rt":4.8,"best":true,"warn":true,"usp":"Frame bulat harga Rp40rb, growth +48% terjual 7800. Murah + laku. Angle: frame bulat buat gaya vintage/artsy cowok.","flag":"Judul ada kata 'Wanita' di versi aslinya — pastikan model unisex dulu sebelum konten di akun cowok."}]};
+const KAL = id => "https://www.kalodata.com/product/detail?id=" + id;
+const TT = id => "https://shop.tiktok.com/view/product/" + id + "?region=ID&locale=id-ID&source=agency";
+const cats = Object.keys(DATA);
+let active = cats[0];
 
-var MD = [{"t":"Buy 1 get (4 kaos 1 tumbler) distro motif terbaru semi katun 24s unisex","b":"Distro Bundling","id":"1734367089693787275","rev":"Rp2,27M","price":"Rp342,12RB","comm":"10%","growth":"+17.4%","gpos":1,"conv":41,"creators":22,"sale":6638,"rating":4.7,"inv":0,"usp":"Revenue #1 Atasan (Rp2,27M) dengan value bomb: 4 kaos + 1 tumbler dalam 1 paket. Kreator baru 22 = early mover. Angle: unboxing 'dapet 5 barang', bandingin harga satuan vs beli ketengan.","flag":""},{"t":"Detroit Work Jacket boxy crop, Jacket Pria bahan Kanvas","b":"Detroit","id":"1729740009264023066","rev":"Rp840,81JT","price":"Rp359,78RB","comm":"15%","growth":"+1.5%","gpos":1,"conv":25,"creators":158,"sale":2337,"rating":4.8,"inv":0,"usp":"Komisi 15% (tertinggi Atasan), bahan kanvas look-mahal, konsisten muncul tiap run. Angle: styling workwear/boxy crop OOTD rugged.","flag":"Muncul dobel di tab Jaket (lintas kategori di Kalodata)."},{"t":"BRINGHTWEAR 2+1 Kaos Original (Extra 1 Tas & 1 Tumbler) Hitam Full Print","b":"BRINGHTWEAR","id":"1737440306122294733","rev":"Rp750,96JT","price":"Rp341,04RB","comm":"10%","growth":"+191.2%","gpos":1,"conv":60,"creators":10,"sale":2202,"rating":4.7,"inv":0,"usp":"Growth +191% meledak, kreator CUMA 10 = blue ocean, konv 60% tinggi. Value bomb (2 kaos + tas + tumbler). Angle: unboxing paket lengkap 'worth it ga sih'.","flag":""},{"t":"[PROMO 10.10] Beli 1 Dapat 2 - Beli Celana Dapat T-Shirt DREAMSTORY Cotton Combed 24s","b":"DREAMSTORY","id":"1733279951008990501","rev":"Rp742,73JT","price":"Rp166,72RB","comm":"8%","growth":"-31%","gpos":0,"conv":59,"creators":99,"sale":4455,"rating":4.8,"inv":1,"usp":"ADA DI INVENTORY (brand DREAMSTORY udah ada stok) = zero-risk tes konten. Buy1Get2, konv 59%, rating 4.8. Growth -31% jadi butuh angle fresh biar naik lagi.","flag":"Prioritas shooting: stok brand udah ada, tinggal eksekusi."},{"t":"SEVENFLY Jaket Parasut Pria Wanita Windbreaker Waterproof Anti Air Original Premium","b":"SEVENFLY","id":"1729746947907028689","rev":"Rp680,55JT","price":"Rp131,99RB","comm":"10%","growth":"+425.3%","gpos":1,"conv":47,"creators":178,"sale":5156,"rating":4.7,"inv":0,"usp":"Growth +425% meledak, fitur anti-air DEMO-ABLE (siram air = konten viral), murah 132rb. Angle: tes tahan air di depan kamera.","flag":"Muncul dobel di tab Jaket (lintas kategori)."},{"t":"Detroit Work Jacket boxy crop, Jacket Pria bahan Kanvas","b":"Detroit","id":"1729740009264023066","rev":"Rp840,81JT","price":"Rp359,78RB","comm":"15%","growth":"+1.5%","gpos":1,"conv":25,"creators":158,"sale":2337,"rating":4.8,"inv":0,"usp":"Revenue #1 Jaket (Rp840JT), komisi 15% gede, bahan kanvas premium look. Angle: styling workwear boxy crop, OOTD cowok rugged.","flag":""},{"t":"SEVENFLY Jaket Parasut Pria Wanita Windbreaker Waterproof Anti Air Original Premium","b":"SEVENFLY","id":"1729746947907028689","rev":"Rp680,55JT","price":"Rp131,99RB","comm":"10%","growth":"+425.3%","gpos":1,"conv":47,"creators":178,"sale":5156,"rating":4.7,"inv":0,"usp":"Growth +425% meledak + anti air demo-able + murah 132rb = kombinasi juara buat FYP. Angle: tes siram air, 'jaket tahan hujan under 150rb'.","flag":""},{"t":"[BEST SELLER] Screamous WindBreaker Jacket HAMESH BLACK","b":"Screamous","id":"1734428369708942500","rev":"Rp417,64JT","price":"Rp235,42RB","comm":"9%","growth":"+61.9%","gpos":1,"conv":5,"creators":159,"sale":1774,"rating":4.8,"inv":1,"usp":"ADA DI INVENTORY (brand Screamous udah punya stok) = brand lokal kredibel, zero-risk. Growth +61.9%, rating 4.8. Angle: hype brand lokal windbreaker.","flag":"Konv kreator cuma 5% (terendah report) = susah closing, butuh hook kuat + CTA jelas."},{"t":"CELANASTUDIO - Jaket Pria Resleting Boxy Cropped | Zipper Work Jacket","b":"Celana Studio","id":"1732646734038795323","rev":"Rp373,63JT","price":"Rp326,88RB","comm":"11%","growth":"+79.8%","gpos":1,"conv":27,"creators":164,"sale":1143,"rating":4.9,"inv":1,"usp":"ADA DI INVENTORY & tipe produk SAMA PERSIS ('Jaket Boxy Cropped Zipper' Celana Studio udah ada). Komisi 11%, growth +79.8%, rating 4.9. PRIORITAS: tinggal shooting.","flag":"Match terkuat run ini - brand & jenis produk identik sama inventory."},{"t":"Dobujack Jacket Reversible Holly Black","b":"Dobujack","id":"1729674796143904649","rev":"Rp345,46JT","price":"Rp228,18RB","comm":"10%","growth":"+21.1%","gpos":1,"conv":12,"creators":170,"sale":1514,"rating":4.8,"inv":0,"usp":"Reversible 2in1 (bolak-balik bisa dipake 2 sisi) = fitur unik demo-able. Angle: '1 jaket 2 gaya', transisi bolak-balik di kamera.","flag":"Konv 12% agak rendah."},{"t":"PROMO (Paket Isi 6pcs) Celana Dalam Boxer Pria Premium Anti Bakteri Nyaman & Elastis","b":"Paket 6pcs","id":"1733909616736896518","rev":"Rp702,67JT","price":"Rp140,00RB","comm":"10%","growth":"-3.6%","gpos":0,"conv":65,"creators":150,"sale":5019,"rating":4.9,"inv":0,"usp":"Revenue #1 kategori, konv 65% (tertinggi Pakaian Dalam), value 6pcs cuma 140rb, rating 4.9. Angle: 'sekotak isi 6, hitung per-pcs berapa'.","flag":""},{"t":"【3 PCS】Celana Dalam Pria Bernapas - Desain Premium, Ringan & Bebas Gerah","b":"3 PCS Premium","id":"1731873653169161915","rev":"Rp387,49JT","price":"Rp150,13RB","comm":"8%","growth":"+522.2%","gpos":1,"conv":40,"creators":156,"sale":2581,"rating":4.9,"inv":0,"usp":"Growth +522% MELEDAK (tertinggi se-report), rating 4.9. Early momentum paling kuat. Angle: breathable/anti-gerah, demo bahan adem.","flag":""},{"t":"[PROMO] VAUDREE - Paket Hemat Isi 4 Pcs Boxer Pria Ice Silk Lembut Dingin Antibakteri","b":"VAUDREE","id":"1730289531401569985","rev":"Rp372,90JT","price":"Rp96,96RB","comm":"10%","growth":"-3%","gpos":0,"conv":63,"creators":92,"sale":3846,"rating":4.6,"inv":0,"usp":"Ice silk dingin, super murah 97rb/4pcs, konv 63%, kreator 92 = low comp. Angle: 'adem buat cuaca panas', tes bahan ice silk.","flag":""},{"t":"VIMISU Celana Dalam Pria Seamless Bahan Sutra Dingin Boxer Dewasa Sport","b":"VIMISU","id":"1732912650543006839","rev":"Rp336,18JT","price":"Rp81,40RB","comm":"15%","growth":"+64.8%","gpos":1,"conv":22,"creators":178,"sale":4130,"rating":4.8,"inv":0,"usp":"Komisi 15% (tertinggi kategori), super murah 81rb, seamless/tanpa jahitan. Growth +64.8%. Angle: seamless ga keliatan garis.","flag":"Konv 22% agak rendah, butuh hook."},{"t":"3/6pcs UOMO Pakaian Dalam Olahraga Boxer Fit Dewasa Pria Bahan Lembut","b":"UOMO","id":"1729739310160839706","rev":"Rp323,42JT","price":"Rp83,10RB","comm":"10%","growth":"-35.7%","gpos":0,"conv":48,"creators":122,"sale":3892,"rating":4.8,"inv":0,"usp":"Murah 83rb, sporty boxer fit, konv 48%. Angle: buat olahraga/gym, breathable. Growth -35.7% momentum turun.","flag":"Momentum lagi turun, masuk karena low-comp."},{"t":"SOLLOSA HYDRA GEL ORIGINAL FOR MAN BISA COD","b":"SOLLOSA","id":"1733047160950130597","rev":"Rp1,28M","price":"Rp126,78RB","comm":"20%","growth":"+81.6%","gpos":1,"conv":98,"creators":62,"sale":10106,"rating":4.8,"inv":0,"usp":"JUARA SE-REPORT: revenue Rp1,28M, komisi 20%, konv 98%, sale 10rb+, kreator 62 masih early. Konsisten juara tiap run. Angle: before-after kulit pria kusam jadi segar.","flag":""},{"t":"SODOXIN FOR MEN Kemasan Roll On 10ml Praktis Efektif","b":"SODOXIN","id":"1737390032481060213","rev":"Rp771,75JT","price":"Rp111,83RB","comm":"20%","growth":"-86.7%","gpos":0,"conv":100,"creators":9,"sale":6901,"rating":5,"inv":0,"usp":"Komisi 20%, konv 100%, rating 5, kreator CUMA 9 = ultra blue ocean. Angle: praktis roll-on, demo pemakaian. Growth -86% tapi kompetisi nyaris nol = peluang.","flag":"Momentum turun tajam, tapi kreator cuma 9 = ruang gede buat first mover."},{"t":"【KOL】Shuluoda Skin Freshness Spray Perawatan Pria 30ml Formula Botanikal Alami","b":"Shuluoda","id":"1736330422769124793","rev":"Rp646,17JT","price":"Rp72,20RB","comm":"8%","growth":"+32.7%","gpos":1,"conv":97,"creators":87,"sale":8950,"rating":4.5,"inv":0,"usp":"Konv 97%, sale 8950, murah 72rb, formula botanikal. Angle: semprot seger instan abis aktivitas, ASMR spray.","flag":""},{"t":"Garnier Men Facial Foam 100ml (x5) - Pack of 5 Facial Cleanser","b":"Garnier","id":"1735212027981235823","rev":"Rp604,71JT","price":"Rp141,45RB","comm":"8%","growth":"-50.1%","gpos":0,"conv":63,"creators":68,"sale":4275,"rating":4.9,"inv":0,"usp":"Brand BESAR trusted (Garnier), pack of 5 = value restock, rating 4.9, konv 63%. Angle: 'stok facial foam setahun', brand yang orang udah percaya.","flag":"Growth -50% tapi brand kuat = gampang closing karena trust."},{"t":"OLE-ZOL Roll On Original Nyaman Digunakan Bisa Bayar Ditempat","b":"OLE-ZOL","id":"1737383716723655854","rev":"Rp459,58JT","price":"Rp111,66RB","comm":"20%","growth":">999.9%","gpos":1,"conv":100,"creators":57,"sale":4116,"rating":5,"inv":0,"usp":"Growth >999.9% MELEDAK, komisi 20%, konv 100%, rating 5. Early explosive. Angle: roll-on praktis anti bau badan, COD-friendly.","flag":"Early mover momentum ekstrem - gas cepet selagi fresh."},{"t":"Kacamata Hitam Dalwa Fotokromik Visi Siang & Malam, Polarized TR90 UV400","b":"Dalwa","id":"1734305536254510678","rev":"Rp478,87JT","price":"Rp165,93RB","comm":"10%","growth":"+28%","gpos":1,"conv":32,"creators":167,"sale":2886,"rating":4.9,"inv":0,"usp":"Revenue #1 Kacamata. Lensa fotokromik (berubah warna siang/malam) = fitur DEMO-ABLE paling kuat, frame TR90 fleksibel, rating 4.9. Angle: tes lensa berubah warna indoor-outdoor.","flag":""},{"t":"Kacamata Hitam UV400 Modis Berkendara Bepergian Di Luar Ruangan Wanita","b":"UV400 Modis","id":"1735477508728915700","rev":"Rp389,59JT","price":"Rp41,62RB","comm":"10%","growth":"+55.8%","gpos":1,"conv":50,"creators":105,"sale":9361,"rating":4.8,"inv":0,"usp":"Super murah 42rb, sale 9361 (terlaris kategori), konv 50%, growth +55.8%. Angle: daily sunglasses murah meriah.","flag":"OFF-NICHE: judul 'Wanita' - cek relevansi audience outfit pria dulu sebelum push."},{"t":"Kacamata Sunglasses Frame Kotak PD28812 Polarized Anti UV-400 Fullset","b":"PD28812","id":"1732153348567172686","rev":"Rp359,35JT","price":"Rp116,94RB","comm":"9%","growth":"-8.9%","gpos":0,"conv":32,"creators":146,"sale":3073,"rating":4.8,"inv":0,"usp":"Polarized anti UV400 fullset (lengkap case), frame kotak tren. Angle: fashion daily driver, cocok muka kotak/oval.","flag":""},{"t":"【GM-Plot 2370 Kacamata (Buy 1 Get 5)】Eksklusif Premium Gift Box Polarized UV","b":"GM-Plot","id":"1729993614200572197","rev":"Rp333,67JT","price":"Rp105,52RB","comm":"9%","growth":"+32%","gpos":1,"conv":45,"creators":38,"sale":3162,"rating":4.9,"inv":0,"usp":"Value BOMB: Beli 1 Dapat 5 + gift box, kreator CUMA 38 = early mover, rating 4.9. Konsisten muncul tiap run. Angle: unboxing '1 jadi 5', value per-pcs.","flag":""},{"t":"【FLEKSIBEL】Dalwa Kacamata Driving Fotokromik Polarized Anti UV400 360°","b":"Dalwa","id":"1731688775140083286","rev":"Rp315,59JT","price":"Rp199,74RB","comm":"10%","growth":"-6%","gpos":0,"conv":34,"creators":131,"sale":1580,"rating":4.8,"inv":0,"usp":"Lensa fotokromik buat nyetir, anti UV400 360°, premium 200rb, frame fleksibel universal. Angle: tes buat nyetir siang-malam, anti silau.","flag":""}];
-function showCat(i){
-  document.querySelectorAll('.tab').forEach(function(t){t.classList.toggle('active', +t.dataset.cat===i);});
-  document.querySelectorAll('.cat-pane').forEach(function(p){p.classList.toggle('active', +p.dataset.cat===i);});
+function badges(p){
+  let h = "";
+  if(p.inv) h += '<span class="badge b-inv">🔥 Inventory</span>';
+  if(p.early) h += '<span class="badge b-early">🚀 Early Mover</span>';
+  if(p.best) h += '<span class="badge b-best">⭐ Best Seller</span>';
+  if(p.warn) h += '<span class="badge b-warn">⚠️ Cek</span>';
+  return h;
 }
-function openModal(i){
-  var p=MD[i];
-  var k="https://www.kalodata.com/product/detail?id="+p.id;
-  var ts="https://shop.tiktok.com/view/product/"+p.id+"?region=ID&locale=id-ID&source=agency";
-  var gcls=p.gpos?'pos':'neg';
-  var fire=p.inv?' <span class="fire">&#128293; ADA DI INVENTORY</span>':'';
-  var h='';
-  h+='<div class="mhead"><div class="mbrand">'+p.b+fire+'</div><button class="mclose" onclick="closeModal()">&times;</button></div>';
-  h+='<div class="mtitle">'+p.t+'</div>';
-  h+='<div class="mgrid">';
-  h+='<div class="mm"><span>Revenue 30hr</span><b class="rev">'+p.rev+'</b></div>';
-  h+='<div class="mm"><span>Harga Jual</span><b>'+p.price+'</b></div>';
-  h+='<div class="mm"><span>Komisi</span><b class="comm">'+p.comm+'</b></div>';
-  h+='<div class="mm"><span>Growth 30hr</span><b class="'+gcls+'">'+p.growth+'</b></div>';
-  h+='<div class="mm"><span>Konv Kreator</span><b>'+p.conv+'%</b></div>';
-  h+='<div class="mm"><span>Jumlah Kreator</span><b>'+p.creators+'</b></div>';
-  h+='<div class="mm"><span>Terjual 30hr</span><b>'+p.sale.toLocaleString('id-ID')+'</b></div>';
-  h+='<div class="mm"><span>Rating</span><b>&#11088; '+p.rating+'</b></div>';
-  h+='</div>';
-  h+='<div class="uspbox"><div class="usplabel">&#128161; USP / Nilai Jual</div><p>'+p.usp+'</p></div>';
-  if(p.flag){h+='<div class="flagbox">&#9888; '+p.flag+'</div>';}
-  h+='<div class="links">';
-  h+='<a class="btn btnk" href="'+k+'" target="_blank" rel="noopener">&#128202; Kalodata Detail</a>';
-  h+='<a class="btn btnt" href="'+ts+'" target="_blank" rel="noopener">&#128722; TikTok Shop</a>';
-  h+='</div>';
-  document.getElementById('modalBody').innerHTML=h;
-  document.getElementById('overlay').classList.add('show');
-}
-function closeModal(){document.getElementById('overlay').classList.remove('show');}
-document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
-document.getElementById('overlay').addEventListener('click',function(e){if(e.target.id==='overlay')closeModal();});
+function growthCls(g){ return g.indexOf("-")===0 ? "neg" : "pos"; }
 
+function renderGrid(){
+  const items = DATA[active];
+  document.getElementById("grid").innerHTML = items.map((p,i)=>`
+    <div class="card" onclick="openM('${active}',${i})">
+      <div class="rank">#${i+1}</div>
+      <div class="badges">${badges(p)}</div>
+      <div class="ptitle">${p.t}</div>
+      <div class="metrics">
+        <div class="m"><small>Revenue 30hr</small><b>${p.rev}</b></div>
+        <div class="m"><small>Growth</small><b class="${growthCls(p.g)}">${p.g}</b></div>
+        <div class="m"><small>Harga</small><b>${p.up}</b></div>
+        <div class="m"><small>Komisi</small><b style="color:var(--accent)">${p.c}</b></div>
+        <div class="m"><small>Kreator</small><b>${p.cn}</b></div>
+        <div class="m"><small>Konv · Rating</small><b>${p.cv}% · ${p.rt}★</b></div>
+      </div>
+      <div class="foot-tap">tap buat USP + link →</div>
+    </div>`).join("");
+}
+function renderTabs(){
+  document.getElementById("tabs").innerHTML = cats.map(c=>`
+    <div class="tab ${c===active?'active':''}" onclick="setCat('${c}')">${c} <span style="opacity:.6">(${DATA[c].length})</span></div>`).join("");
+}
+function setCat(c){ active=c; renderTabs(); renderGrid(); window.scrollTo({top:0,behavior:'smooth'}); }
+function openM(cat,i){
+  const p = DATA[cat][i];
+  document.getElementById("modal").innerHTML = `
+    <div class="mhead"><h2>${p.t}</h2><button class="close" onclick="closeM()">✕</button></div>
+    <div class="mseller">${p.seller} · <span style="color:var(--mut)">${cat} · #${i+1}</span></div>
+    <div class="badges" style="margin-bottom:16px">${badges(p)||'<span style="color:var(--mut);font-size:12px">—</span>'}</div>
+    <div class="mgrid">
+      <div class="mg"><small>Revenue 30hr</small><b>${p.rev}</b></div>
+      <div class="mg"><small>Growth 30hr</small><b class="${growthCls(p.g)}">${p.g}</b></div>
+      <div class="mg"><small>Penjualan</small><b>${p.sl.toLocaleString('id')}</b></div>
+      <div class="mg"><small>Harga Jual</small><b>${p.up}</b></div>
+      <div class="mg"><small>Avg Price</small><b>${p.up}</b></div>
+      <div class="mg"><small>Komisi</small><b style="color:var(--accent)">${p.c}</b></div>
+      <div class="mg"><small>Jumlah Kreator</small><b>${p.cn}</b></div>
+      <div class="mg"><small>Konversi Kreator</small><b>${p.cv}%</b></div>
+      <div class="mg"><small>Rating</small><b>${p.rt} ★</b></div>
+    </div>
+    <div class="usp"><div class="lbl">💡 USP / Nilai Jual — Angle Konten</div><p>${p.usp}</p></div>
+    ${p.flag?`<div class="flag">⚠️ ${p.flag}</div>`:''}
+    <div class="links">
+      <a class="lnk lnk-kal" href="${KAL(p.id)}" target="_blank" rel="noopener">📊 Buka Kalodata</a>
+      <a class="lnk lnk-tt" href="${TT(p.id)}" target="_blank" rel="noopener">🛒 TikTok Shop</a>
+    </div>`;
+  document.getElementById("ov").classList.add("show");
+  document.body.style.overflow="hidden";
+}
+function closeM(){ document.getElementById("ov").classList.remove("show"); document.body.style.overflow=""; }
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeM();});
+const months=["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
+const d=new Date();
+document.getElementById("dateline").textContent = "📅 " + d.getDate()+" "+months[d.getMonth()]+" "+d.getFullYear()+" · Rentang data 30 hari terakhir";
+renderTabs(); renderGrid();
 </script>
 </body>
 </html>
